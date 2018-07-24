@@ -1,0 +1,41 @@
+elasticsearch-data:
+  image: 'alpine'
+  command: '/bin/true'
+  volumes:
+  - '/data/elasticsearch:/usr/share/elasticsearch/data'
+
+elasticsearch:
+  image: 'elasticsearch'
+  ports:
+  - '9200:9200'
+  - '9300:9300'
+  volumes_from:
+  - 'elasticsearch-data'
+
+logstash:
+  image: 'logstash'
+  command: 'logstash -e ''input { syslog { port => 12345 type => "docker" } } output { elasticsearch { hosts => "10.128.6.162" } }'''
+  expose:
+  - '12345/udp'
+  - '12345/tcp'
+  ports:
+  - '12345:12345/tcp'
+  - '12345:12345/udp'
+  links:
+  - elasticsearch
+
+kibana:
+  image: kibana
+  environment:
+  - ELASTICSEARCH_URL=http://10.128.6.162:9200
+  ports:
+  - '5601:5601'
+
+logspout:
+  image: 'gliderlabs/logspout'
+  entrypoint: '/bin/sh'
+  command: '-c ''/bin/logspout syslog://10.128.6.162:12345'''
+  volumes:
+  - '/var/run/docker.sock:/tmp/docker.sock'
+  links:
+  - logstash

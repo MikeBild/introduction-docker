@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "name": "compose-nodejs-redis",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "NODE_ENV=production node server.js"
+  },
+  "dependencies": {
+    "express": "^4.14.1",
+    "redis": "^2.8.0"
+  }
+}

@@ -1,0 +1,16 @@
+version: '3'
+services:
+  web:
+    image: mikebild/compose-nodejs-redis:1.0.0
+    environment:
+      NODE_ENV: production
+      REDIS_HOST: 'redis'
+      REDIS_PORT: '6379'
+    ports:
+      - '8080:8080'
+    links:
+      - 'redis'
+    depends_on:
+      - 'redis'
+  redis:
+    image: redis:4.0.11
