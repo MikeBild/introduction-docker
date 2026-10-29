@@ -1,0 +1,53 @@
+Started by user [8mha:////4MGiesKTP77JPsX7xnnTxBcvcusQgHvzqGu3kpzriirDAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzWEgZu/dLi1CL9xJTczDwAj6GcLcAAAAA=[0madmin
+Building in workspace /var/jenkins_home/workspace/demo1
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/MikeBild/web-messaging.git # timeout=10
+Fetching upstream changes from https://github.com/MikeBild/web-messaging.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/MikeBild/web-messaging.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision 5ca68ef81712d6cc46014f4726a26b39f5db75ed (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 5ca68ef81712d6cc46014f4726a26b39f5db75ed
+ > git rev-list 5ca68ef81712d6cc46014f4726a26b39f5db75ed # timeout=10
+[demo1] $ /bin/sh -xe /tmp/hudson9163571184823933510.sh
++ 
++ sudo docker build -t mywebmessagingapp .
++ sudo docker rm mywebmessagingapp -f
+Error response from daemon: No such container: mywebmessagingapp
+Sending build context to Docker daemon 98.82 kB
+Step 1/5 : FROM node:0.10-onbuild
+[91m# Executing 5 build triggers...
+[0mStep 1/1 : ARG NODE_ENV
+ ---> Using cache
+Step 1/1 : ENV NODE_ENV $NODE_ENV
+ ---> Using cache
+Step 1/1 : COPY package.json /usr/src/app/
+ ---> Using cache
+Step 1/1 : RUN npm install
+ ---> Using cache
+Step 1/1 : COPY . /usr/src/app
+ ---> d7e6a6695d11
+Removing intermediate container bba2a1369c20
+Step 2/5 : ADD . /
+ ---> b51b370200d4
+Removing intermediate container e33f63ebd3ee
+Step 3/5 : WORKDIR /
+ ---> cc342c61c083
+Removing intermediate container d4294988c088
+Step 4/5 : RUN npm install
+ ---> Running in 31e2770367f0
+[91mnpm[0m[91m WARN package.json web-messaging@0.0.3 No repository field.
+[0mrx@2.5.3 node_modules/rx
+ ---> 52da86047178
+Removing intermediate container 31e2770367f0
+Step 5/5 : ENTRYPOINT node server.js
+ ---> Running in 226930cf3cdb
+ ---> f06a18fb255f
+Removing intermediate container 226930cf3cdb
+Successfully built f06a18fb255f
++ sudo docker run --rm -d -e SERVICE_PORT=80 -p 9090:80 --name mywebmessagingapp mywebmessagingapp
+9006595e50e49418173ee3fd47df00340b3cefa62016502bfe6d21b00ddffe5b
+Finished: SUCCESS

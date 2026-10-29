@@ -1,0 +1,62 @@
+Started by user [8mha:////4MGiesKTP77JPsX7xnnTxBcvcusQgHvzqGu3kpzriirDAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzWEgZu/dLi1CL9xJTczDwAj6GcLcAAAAA=[0madmin
+Building in workspace /var/jenkins_home/workspace/demo1
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/MikeBild/web-messaging.git # timeout=10
+Fetching upstream changes from https://github.com/MikeBild/web-messaging.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/MikeBild/web-messaging.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision 1eab6553b0b1f53ba2435b979aa402d8034d56ea (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 1eab6553b0b1f53ba2435b979aa402d8034d56ea
+ > git rev-list 1eab6553b0b1f53ba2435b979aa402d8034d56ea # timeout=10
+[demo1] $ /bin/sh -xe /tmp/hudson448755841292800927.sh
++ sudo docker build -t mywebmessagingapp .
+Sending build context to Docker daemon 94.21 kB
+Step 1/4 : FROM node:0.10-onbuild
+[91m# Executing 5 build triggers...
+[0mStep 1/1 : ARG NODE_ENV
+ ---> Using cache
+Step 1/1 : ENV NODE_ENV $NODE_ENV
+ ---> Using cache
+Step 1/1 : COPY package.json /usr/src/app/
+ ---> Using cache
+Step 1/1 : RUN npm install
+ ---> Using cache
+Step 1/1 : COPY . /usr/src/app
+ ---> Using cache
+ ---> d91473d7cb84
+Step 2/4 : ADD . /
+ ---> Using cache
+ ---> fe8beaf7259f
+Step 3/4 : WORKDIR /
+ ---> Using cache
+ ---> 401eee5997e7
+Step 4/4 : ENTRYPOINT node server.js
+ ---> Using cache
+ ---> 4c5c6202c1a7
+Successfully built 4c5c6202c1a7
+[demo1] $ /bin/sh -xe /tmp/hudson8683232185947708344.sh
++ 
++ sudo docker run -e SERVICE_PORT=80 -p 9090:80 --name mywebmessagingapp mywebmessagingapp
++ sudo docker rm mywebmessagingapp -f
+Error response from daemon: No such container: mywebmessagingapp
+
+module.js:340
+    throw err;
+          ^
+Error: Cannot find module 'rx'
+    at Function.Module._resolveFilename (module.js:338:15)
+    at Function.Module._load (module.js:280:25)
+    at Module.require (module.js:364:17)
+    at require (module.js:380:17)
+    at Object.<anonymous> (/server.js:3:10)
+    at Module._compile (module.js:456:26)
+    at Object.Module._extensions..js (module.js:474:10)
+    at Module.load (module.js:356:32)
+    at Function.Module._load (module.js:312:12)
+    at Function.Module.runMain (module.js:497:10)
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE

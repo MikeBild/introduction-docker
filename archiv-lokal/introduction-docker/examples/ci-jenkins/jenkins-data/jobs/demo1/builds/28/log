@@ -1,0 +1,49 @@
+Started by user [8mha:////4MGiesKTP77JPsX7xnnTxBcvcusQgHvzqGu3kpzriirDAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzWEgZu/dLi1CL9xJTczDwAj6GcLcAAAAA=[0madmin
+Building in workspace /var/jenkins_home/workspace/demo1
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/MikeBild/web-messaging.git # timeout=10
+Fetching upstream changes from https://github.com/MikeBild/web-messaging.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/MikeBild/web-messaging.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision 5ca68ef81712d6cc46014f4726a26b39f5db75ed (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 5ca68ef81712d6cc46014f4726a26b39f5db75ed
+ > git rev-list 5ca68ef81712d6cc46014f4726a26b39f5db75ed # timeout=10
+[demo1] $ /bin/sh -xe /tmp/hudson4245867543251535888.sh
++ 
++ sudo docker build -t mywebmessagingapp .
++ sudo docker rm mywebmessagingapp -f
+mywebmessagingapp
+Sending build context to Docker daemon 98.82 kB
+Step 1/5 : FROM node:0.10-onbuild
+[91m# Executing 5 build triggers...
+[0mStep 1/1 : ARG NODE_ENV
+ ---> Using cache
+Step 1/1 : ENV NODE_ENV $NODE_ENV
+ ---> Using cache
+Step 1/1 : COPY package.json /usr/src/app/
+ ---> Using cache
+Step 1/1 : RUN npm install
+ ---> Using cache
+Step 1/1 : COPY . /usr/src/app
+ ---> Using cache
+ ---> e4358c9c8a05
+Step 2/5 : ADD . /
+ ---> Using cache
+ ---> 37699bb5bef9
+Step 3/5 : WORKDIR /
+ ---> Using cache
+ ---> e6abdb1d86c0
+Step 4/5 : RUN npm install
+ ---> Using cache
+ ---> c82548ef1b43
+Step 5/5 : ENTRYPOINT node server.js
+ ---> Using cache
+ ---> 3b794ef7c04d
+Successfully built 3b794ef7c04d
++ sudo docker run --rm -d -e SERVICE_PORT=80 -p 9090:80 --name mywebmessagingapp mywebmessagingapp
+c4a395c3a097cc20b87be600ccec2c7ad58ebc3ed3827f66e3383099dfbe4a6d
+Finished: SUCCESS

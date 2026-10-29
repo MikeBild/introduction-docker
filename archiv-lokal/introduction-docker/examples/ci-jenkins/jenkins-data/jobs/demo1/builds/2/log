@@ -1,0 +1,89 @@
+Started by user [8mha:////4MGiesKTP77JPsX7xnnTxBcvcusQgHvzqGu3kpzriirDAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzWEgZu/dLi1CL9xJTczDwAj6GcLcAAAAA=[0madmin
+Building in workspace /var/jenkins_home/workspace/demo1
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/MikeBild/web-messaging.git # timeout=10
+Fetching upstream changes from https://github.com/MikeBild/web-messaging.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/MikeBild/web-messaging.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision 1eab6553b0b1f53ba2435b979aa402d8034d56ea (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 1eab6553b0b1f53ba2435b979aa402d8034d56ea
+ > git rev-list 1eab6553b0b1f53ba2435b979aa402d8034d56ea # timeout=10
+[demo1] $ /bin/sh -xe /tmp/hudson3778718726124067171.sh
++ sudo docker build -t mywebmessagingapp .
+Sending build context to Docker daemon 94.21 kB
+Step 1/4 : FROM node:0.10-onbuild
+0.10-onbuild: Pulling from library/node
+386a066cd84a: Pulling fs layer
+75ea84187083: Pulling fs layer
+88b459c9f665: Pulling fs layer
+1e3ee139a577: Pulling fs layer
+bd2400e7d880: Pulling fs layer
+b8c6812ba469: Pulling fs layer
+0adf07c73141: Pulling fs layer
+b24acc262d38: Pulling fs layer
+1e3ee139a577: Waiting
+bd2400e7d880: Waiting
+b8c6812ba469: Waiting
+0adf07c73141: Waiting
+b24acc262d38: Waiting
+75ea84187083: Verifying Checksum
+75ea84187083: Download complete
+88b459c9f665: Verifying Checksum
+88b459c9f665: Download complete
+386a066cd84a: Verifying Checksum
+386a066cd84a: Download complete
+bd2400e7d880: Verifying Checksum
+bd2400e7d880: Download complete
+386a066cd84a: Pull complete
+b8c6812ba469: Verifying Checksum
+b8c6812ba469: Download complete
+75ea84187083: Pull complete
+0adf07c73141: Verifying Checksum
+0adf07c73141: Download complete
+b24acc262d38: Verifying Checksum
+b24acc262d38: Download complete
+88b459c9f665: Pull complete
+1e3ee139a577: Verifying Checksum
+1e3ee139a577: Download complete
+1e3ee139a577: Pull complete
+bd2400e7d880: Pull complete
+b8c6812ba469: Pull complete
+0adf07c73141: Pull complete
+b24acc262d38: Pull complete
+Digest: sha256:ad41527a477b1a0efeb0f4fc52b799f7ccd9567c8c20230630844530ecff94aa
+Status: Downloaded newer image for node:0.10-onbuild
+[91m# Executing 5 build triggers...
+[0mStep 1/1 : ARG NODE_ENV
+ ---> Running in 7987a9879b48
+Step 1/1 : ENV NODE_ENV $NODE_ENV
+ ---> Running in 43fe28469839
+Step 1/1 : COPY package.json /usr/src/app/
+Step 1/1 : RUN npm install
+ ---> Running in 070fa5e165d5
+[91mnpm WARN package.json web-messaging@0.0.3 No description
+npm WARN package.json web-messaging@0.0.3 No repository field.
+npm WARN package.json web-messaging@0.0.3 No README data
+[0mrx@2.5.3 node_modules/rx
+Step 1/1 : COPY . /usr/src/app
+ ---> d91473d7cb84
+Removing intermediate container 7987a9879b48
+Removing intermediate container 43fe28469839
+Removing intermediate container 0fbd57654ff5
+Removing intermediate container 070fa5e165d5
+Removing intermediate container 68746c3cba27
+Step 2/4 : ADD . /
+ ---> fe8beaf7259f
+Removing intermediate container edfc146b88fc
+Step 3/4 : WORKDIR /
+ ---> 401eee5997e7
+Removing intermediate container 1559343b57dc
+Step 4/4 : ENTRYPOINT node server.js
+ ---> Running in ba07bbeb1764
+ ---> 4c5c6202c1a7
+Removing intermediate container ba07bbeb1764
+Successfully built 4c5c6202c1a7
+Finished: SUCCESS

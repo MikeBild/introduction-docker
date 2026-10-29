@@ -1,0 +1,24 @@
+Started by user [8mha:////4MGiesKTP77JPsX7xnnTxBcvcusQgHvzqGu3kpzriirDAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzWEgZu/dLi1CL9xJTczDwAj6GcLcAAAAA=[0madmin
+Building in workspace /var/jenkins_home/workspace/demo1
+Cloning the remote Git repository
+Cloning repository https://github.com/MikeBild/web-messaging.git
+ > git init /var/jenkins_home/workspace/demo1 # timeout=10
+Fetching upstream changes from https://github.com/MikeBild/web-messaging.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/MikeBild/web-messaging.git +refs/heads/*:refs/remotes/origin/*
+ > git config remote.origin.url https://github.com/MikeBild/web-messaging.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/MikeBild/web-messaging.git # timeout=10
+Fetching upstream changes from https://github.com/MikeBild/web-messaging.git
+ > git fetch --tags --progress https://github.com/MikeBild/web-messaging.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision 1eab6553b0b1f53ba2435b979aa402d8034d56ea (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 1eab6553b0b1f53ba2435b979aa402d8034d56ea
+First time build. Skipping changelog.
+[demo1] $ /bin/sh -xe /tmp/hudson3803340796506425516.sh
++ docker build -t mywebmessagingapp .
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.25/build?buildargs=%7B%7D&cachefrom=%5B%5D&cgroupparent=&cpuperiod=0&cpuquota=0&cpusetcpus=&cpusetmems=&cpushares=0&dockerfile=Dockerfile&labels=%7B%7D&memory=0&memswap=0&networkmode=default&rm=1&shmsize=0&t=mywebmessagingapp&ulimits=null: dial unix /var/run/docker.sock: connect: permission denied
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE
