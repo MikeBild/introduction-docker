@@ -1,0 +1,29 @@
+# Gestartet heißt noch nicht bereit: Healthchecks für API und Postgres.
+# TODO 1: db bekommt einen healthcheck mit pg_isready -U postgres -d shop (interval 5s, retries 10).
+# TODO 2: api wartet per depends_on mit condition: service_healthy auf db.
+# TODO 3: api bekommt einen healthcheck auf /readyz. node:26-slim hat kein curl – nimm node -e mit fetch.
+# TODO 4: Starte mit docker compose up -d --wait und beobachte docker compose ps.
+name: werkstatt-shop
+
+services:
+  api:
+    build: .
+    image: shop-api:1.0.0
+    environment:
+      DATABASE_URL: postgres://postgres:werkstatt@db:5432/shop
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_PASSWORD: werkstatt
+      POSTGRES_DB: shop
+    volumes:
+      - db-data:/var/lib/postgresql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+volumes:
+  db-data:
