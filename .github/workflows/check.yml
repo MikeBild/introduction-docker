@@ -9,8 +9,8 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
           cache: npm
@@ -21,7 +21,7 @@ jobs:
     # Baut die Lösungen und startet die Stacks wirklich – mit Healthchecks.
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: 03 Volumes und Netze
         working-directory: exercises/03-docker-volumes-networks/solution
         run: bash run.sh && bash cleanup.sh
