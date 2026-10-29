@@ -3,7 +3,7 @@ import { script } from '../../../../scripts/lib/files.ts'
 
 const run = script(`${import.meta.dirname}/..`, 'run.sh')
 
-// Entferne .skip, wenn du loslegst.
+// Entferne .skip, sobald du mit der Übung beginnst.
 describe.skip('01 Container statt VM', () => {
   it('startet node:26-slim und räumt mit --rm auf', () => {
     expect(run).toMatch(/docker run --rm .*node:26-slim/)

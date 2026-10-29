@@ -4,7 +4,7 @@ import { compose } from '../../../../scripts/lib/files.ts'
 const { services } = compose(`${import.meta.dirname}/..`)
 const testOf = (name: string) => [services[name]?.healthcheck?.test ?? []].flat().join(' ')
 
-// Entferne .skip, wenn du loslegst.
+// Entferne .skip, sobald du mit der Übung beginnst.
 describe.skip('05 Healthchecks', () => {
   it('prüft Postgres mit pg_isready', () => {
     expect(testOf('db')).toMatch(/pg_isready/)

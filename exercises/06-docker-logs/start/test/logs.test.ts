@@ -5,7 +5,7 @@ const dir = `${import.meta.dirname}/..`
 const { services } = compose(dir)
 const logs = script(dir, 'logs.sh')
 
-// Entferne .skip, wenn du loslegst.
+// Entferne .skip, sobald du mit der Übung beginnst.
 describe.skip('06 Logs', () => {
   it('nutzt für jeden Service den Driver local mit Rotation', () => {
     for (const name of ['api', 'db']) {

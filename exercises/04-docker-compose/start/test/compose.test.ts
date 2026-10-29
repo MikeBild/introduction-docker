@@ -3,7 +3,7 @@ import { compose } from '../../../../scripts/lib/files.ts'
 
 const { services, volumes, version } = compose(`${import.meta.dirname}/..`)
 
-// Entferne .skip, wenn du loslegst.
+// Entferne .skip, sobald du mit der Übung beginnst.
 describe.skip('04 Compose', () => {
   it('beschreibt die Services api und db ohne version', () => {
     expect(Object.keys(services).sort()).toEqual(['api', 'db'])

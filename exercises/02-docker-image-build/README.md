@@ -15,7 +15,7 @@ docker run --rm --entrypoint id shop-api:naiv
 
 Verbessere dann [`start/Dockerfile`](start/Dockerfile) und leg eine `.dockerignore` an:
 
-1. Base Image `node:26-slim` statt `node:latest`.
+1. Base-Image `node:26-slim` statt `node:latest`.
 2. Stage `deps` mit `npm ci --omit=dev`; die zweite Stage kopiert nur `node_modules`, `package.json` und `src`.
 3. Lockfile vor dem Quellcode kopieren, damit der Layer mit den Dependencies im Cache bleibt.
 4. `USER node` und `CMD ["node", "src/main.ts"]`.

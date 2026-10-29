@@ -3,7 +3,7 @@ import { script } from '../../../../scripts/lib/files.ts'
 
 const run = script(`${import.meta.dirname}/..`, 'run.sh')
 
-// Entferne .skip, wenn du loslegst.
+// Entferne .skip, sobald du mit der Übung beginnst.
 describe.skip('03 Volumes und Netze', () => {
   it('legt ein eigenes Netz und ein Named Volume an', () => {
     expect(run).toMatch(/docker network create shop-net/)

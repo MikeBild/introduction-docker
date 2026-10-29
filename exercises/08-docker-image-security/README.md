@@ -23,7 +23,7 @@ docker compose down -v
 - Das CI-Gate endet mit Exit-Code 0.
 - Der gehärtete Stack wird `healthy`, obwohl das Dateisystem der API read-only ist.
 
-Die Zahlen ändern sich täglich, weil neue CVEs bekannt werden. Scanne deshalb in der CI bei jedem Build und regelmäßig auch Images, die schon in der Registry liegen. Alternativ zu Trivy zeigt `docker scout cves shop-api:1.1.0` dieselbe Art Bericht.
+Die Zahlen ändern sich täglich, weil neue Schwachstellen (CVEs, Common Vulnerabilities and Exposures) bekannt werden. Scanne deshalb in der CI bei jedem Build und regelmäßig auch Images, die schon in der Registry liegen. Alternativ zu Trivy zeigt `docker scout cves shop-api:1.1.0` dieselbe Art Bericht.
 
 Entferne in `start/test/security.test.ts` das `.skip` und führe `npx vitest exercises/08-docker-image-security/start` aus.
 

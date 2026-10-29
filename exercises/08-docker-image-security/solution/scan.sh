@@ -17,7 +17,7 @@ trivy image --quiet --exit-code 1 --severity CRITICAL --ignore-unfixed shop-api:
 
 # 4. Keine Shell im Image: Ein Angreifer findet nichts, womit er weiterarbeiten kann.
 if docker run --rm --entrypoint sh shop-api:1.1.0 -c true 2>/dev/null; then
-  echo "Shell gefunden – das Image ist nicht distroless" >&2
+  echo "Shell gefunden – das Image ist nicht distroless. Prüf, ob die zweite Stage im Dockerfile auf gcr.io/distroless/nodejs26-debian13:nonroot aufbaut." >&2
   exit 1
 fi
 echo "keine Shell im Image"
