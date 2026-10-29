@@ -4,17 +4,17 @@ import { dockerfile, dockerignore } from '../../../../scripts/lib/files.ts'
 const dir = `${import.meta.dirname}/..`
 const { stages, final } = dockerfile(dir)
 
-// Entferne .skip, wenn du loslegst.
+// Entferne .skip, sobald du mit der Übung beginnst.
 describe.skip('02 Image bauen', () => {
   it('nutzt mindestens zwei Stages', () => {
     expect(stages.length).toBeGreaterThanOrEqual(2)
   })
 
-  it('legt jedes Base Image auf node:26-slim fest', () => {
+  it('legt jedes Base-Image auf node:26-slim fest', () => {
     for (const stage of stages) expect(stage.from).toBe('node:26-slim')
   })
 
-  it('installiert nur Production Dependencies aus dem Lockfile', () => {
+  it('installiert nur Production-Dependencies aus dem Lockfile', () => {
     const runs = stages.flatMap((stage) => stage.instructions.filter((i) => i.cmd === 'RUN').map((i) => i.args))
     expect(runs.some((args) => args.includes('npm ci --omit=dev'))).toBe(true)
   })
@@ -27,7 +27,7 @@ describe.skip('02 Image bauen', () => {
     expect(lock).toBeLessThan(install)
   })
 
-  it('kopiert im fertigen Image nicht den ganzen Build Context', () => {
+  it('kopiert im fertigen Image nicht den ganzen Build-Context', () => {
     expect(final.instructions.some((i) => i.cmd === 'COPY' && /^\.\s+\./.test(i.args))).toBe(false)
     expect(final.instructions.some((i) => i.cmd === 'COPY' && i.args.startsWith('--from='))).toBe(true)
   })
@@ -42,7 +42,7 @@ describe.skip('02 Image bauen', () => {
     expect(JSON.parse(cmd!.args)).toEqual(['node', 'src/main.ts'])
   })
 
-  it('hält node_modules, Tests, Git und .env aus dem Build Context', () => {
+  it('hält node_modules, Tests, Git und .env aus dem Build-Context', () => {
     expect(dockerignore(dir)).toEqual(expect.arrayContaining(['node_modules', 'test', '.git', '.env*']))
   })
 })

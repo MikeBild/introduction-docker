@@ -5,7 +5,7 @@ const dir = `${import.meta.dirname}/..`
 const registry = script(dir, 'registry.sh')
 const { services } = compose(dir)
 
-// Entferne .skip, wenn du loslegst.
+// Entferne .skip, sobald du mit der Übung beginnst.
 describe.skip('07 Registry', () => {
   it('startet registry:3 mit Volume und Neustart-Regel', () => {
     expect(registry).toMatch(/docker run -d --name registry --restart=always/)

@@ -21,7 +21,7 @@ docker compose down -v
 - `jq` gibt nur die Zeilen mit `"msg":"order placed"` aus.
 - Die App selbst kennt weder Logdateien noch Rotation.
 
-Ohne Angabe nutzt Docker den Driver `json-file` ohne Rotation. Für den ganzen Host stellst du den Default in `/etc/docker/daemon.json` mit `"log-driver": "local"` um. Das gilt nur für neu erzeugte Container.
+Ohne Angabe nutzt Docker den Driver `json-file` ohne Rotation. Für den ganzen Host stellst du den Standard in `/etc/docker/daemon.json` mit `"log-driver": "local"` um. Das gilt nur für neu erzeugte Container.
 
 `jq` installierst du mit `brew install jq` oder `apt install jq`.
 

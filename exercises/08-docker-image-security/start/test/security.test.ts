@@ -6,7 +6,7 @@ const { stages, final } = dockerfile(dir)
 const { services } = compose(dir)
 const scan = script(dir, 'scan.sh')
 
-// Entferne .skip, wenn du loslegst.
+// Entferne .skip, sobald du mit der Übung beginnst.
 describe.skip('08 Image-Sicherheit', () => {
   it('installiert mit node:26-slim und läuft auf Distroless als nonroot', () => {
     expect(stages[0]?.from).toBe('node:26-slim')

@@ -24,7 +24,7 @@ docker compose down -v
 - `docker compose ps` zeigt `(healthy)` bei `api` und `db`.
 - Stoppst du `db` mit `docker compose stop db`, wird `api` nach drei Fehlversuchen `unhealthy`.
 
-Der Healthcheck schützt nur den Start. Fällt Postgres später aus, muss die API das selbst vertragen: Hier meldet `/readyz` dann 503, und postgres.js verbindet sich beim nächsten Query neu.
+Der Healthcheck schützt nur den Start. Fällt Postgres später aus, muss die API das selbst vertragen: Hier meldet `/readyz` dann 503, und postgres.js verbindet sich bei der nächsten Abfrage neu.
 
 Entferne in `start/test/compose.test.ts` das `.skip` und führe `npx vitest exercises/05-docker-healthchecks/start` aus.
 

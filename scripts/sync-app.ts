@@ -1,4 +1,4 @@
-// Kopiert die Werkstatt-Shop API aus app/ in jede Übung mit Dockerfile
+// Kopiert die Werkstatt-Shop-API aus app/ in jede Übung mit Dockerfile
 // und erzeugt die Tests im Startpunkt aus den Tests der Lösung.
 // Jede Übung bleibt so eigenständig: cd exercises/<nr>/start && docker build .
 // Aufruf: npm run sync          kopieren
@@ -35,7 +35,7 @@ for (const exercise of readdirSync(join(root, 'exercises'))) {
   for (const file of readdirSync(tests)) {
     const skipped = readFileSync(join(tests, file), 'utf8').replace(
       /^describe\(/m,
-      '// Entferne .skip, wenn du loslegst.\ndescribe.skip(',
+      '// Entferne .skip, sobald du mit der Übung beginnst.\ndescribe.skip(',
     )
     const target = join(root, 'exercises', exercise, 'start', 'test', file)
     if (check) compare(target, skipped)
