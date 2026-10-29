@@ -2,7 +2,7 @@
   "name": "werkstatt-shop-api",
   "version": "1.0.0",
   "private": true,
-  "description": "Werkstatt-Shop API mit Express 5 und Postgres, die Übungs-App für Docker und Kubernetes",
+  "description": "Werkstatt-Shop-API mit Express 5 und Postgres, die Übungs-App für Docker und Kubernetes",
   "type": "module",
   "engines": {
     "node": ">=26"

@@ -1,6 +1,6 @@
 # 02 · Ein gutes Image entsteht in mehreren Stages
 
-Lektion `docker-image-build`. Du machst aus einem naiven Dockerfile ein kleines, reproduzierbares Image für die Werkstatt-Shop API, das nicht als root läuft.
+Lektion `docker-image-build`. Du machst aus einem naiven Dockerfile ein kleines, reproduzierbares Image für die Werkstatt-Shop-API, das nicht als root läuft.
 
 ## Aufgabe
 

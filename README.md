@@ -1,6 +1,6 @@
 # Übungen: Docker
 
-Übungs-Repo zum ersten Teil des Workshops **„Docker & Kubernetes“** ([workshops.mikebild.dev](https://workshops.mikebild.dev)). Zu jeder Docker-Lektion findest du hier eine Aufgabe mit Startpunkt, Lösung und Tests. Alle Übungen drehen sich um dieselbe Anwendung, die Werkstatt-Shop API: Produkte, Bestellungen mit Positionen aus `productId`, `quantity` und `priceCents`, Geld immer in ganzen Cent.
+Übungs-Repo zum ersten Teil des Workshops **„Docker & Kubernetes“** ([workshops.mikebild.dev](https://workshops.mikebild.dev)). Zu jeder Docker-Lektion findest du hier eine Aufgabe mit Startpunkt, Lösung und Tests. Alle Übungen drehen sich um dieselbe Anwendung, die Werkstatt-Shop-API: Produkte, Bestellungen mit Positionen aus `productId`, `quantity` und `priceCents`, Geld immer in ganzen Cent.
 
 Den Kubernetes-Teil findest du in [MikeBild/introduction-kubernetes](https://github.com/MikeBild/introduction-kubernetes). Die Folien stehen unter [slides.mikebild.dev](https://slides.mikebild.dev/introduction-docker.html).
 
@@ -29,7 +29,7 @@ Den Kubernetes-Teil findest du in [MikeBild/introduction-kubernetes](https://git
 ## Aufbau
 
 ```text
-app/                     Werkstatt-Shop API: Express 5, postgres.js, zod
+app/                     Werkstatt-Shop-API: Express 5, postgres.js, zod
   src/main.ts            Start, Graceful Shutdown bei SIGTERM
   src/app.ts             Routen: /products, /orders, /livez, /readyz, /version
   db/init.sql            Tabellen und drei Produkte

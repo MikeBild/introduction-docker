@@ -1,6 +1,6 @@
 # 04 · Compose beschreibt den ganzen Stack
 
-Lektion `docker-compose`. Du ersetzt die Befehle aus Übung 03 durch eine `compose.yaml`: Werkstatt-Shop API mit Express 5 und Postgres 18.
+Lektion `docker-compose`. Du ersetzt die Befehle aus Übung 03 durch eine `compose.yaml`: Werkstatt-Shop-API mit Express 5 und Postgres 18.
 
 ## Aufgabe
 

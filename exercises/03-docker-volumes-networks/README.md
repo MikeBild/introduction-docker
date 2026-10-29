@@ -1,6 +1,6 @@
 # 03 · Daten und Netze leben außerhalb des Containers
 
-Lektion `docker-volumes-networks`. Du verbindest die Werkstatt-Shop API von Hand mit Postgres: über ein eigenes Netz und ein Named Volume.
+Lektion `docker-volumes-networks`. Du verbindest die Werkstatt-Shop-API von Hand mit Postgres: über ein eigenes Netz und ein Named Volume.
 
 ## Aufgabe
 
