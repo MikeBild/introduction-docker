@@ -1,0 +1,10 @@
+# Was nicht ins Image gehört, kommt gar nicht erst in den Build Context.
+node_modules
+test
+db
+.git
+.env*
+*.md
+Dockerfile
+.dockerignore
+compose*.yaml

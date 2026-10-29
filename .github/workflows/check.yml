@@ -1,0 +1,39 @@
+name: check
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+
+  docker:
+    # Baut die Lösungen und startet die Stacks wirklich – mit Healthchecks.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: 03 Volumes und Netze
+        working-directory: exercises/03-docker-volumes-networks/solution
+        run: bash run.sh && bash cleanup.sh
+      - name: 05 Healthchecks
+        working-directory: exercises/05-docker-healthchecks/solution
+        run: |
+          docker compose up -d --build --wait
+          curl -fs localhost:3000/products
+          docker compose down -v
+      - name: 08 Gehärteter Stack
+        working-directory: exercises/08-docker-image-security/solution
+        run: |
+          docker compose up -d --build --wait
+          curl -fs localhost:3000/readyz
+          docker compose down -v

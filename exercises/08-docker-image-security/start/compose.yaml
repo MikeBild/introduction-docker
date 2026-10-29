@@ -1,0 +1,52 @@
+# Gehärteter Stack: Distroless-Image, Dateisystem read-only, keine Capabilities.
+# TODO 4: Setz das Image von api auf shop-api:1.1.0.
+# TODO 5: api bekommt read_only: true, cap_drop: [ALL] und security_opt: ["no-new-privileges:true"].
+# TODO 6: Der Healthcheck braucht im Distroless-Image den vollen Pfad /nodejs/bin/node.
+name: werkstatt-shop
+
+# Eine Logging-Konfiguration für alle Services, per YAML-Anker wiederverwendet.
+x-logging: &logging
+  driver: local
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  api:
+    build: .
+    image: shop-api:1.0.0
+    logging: *logging
+    environment:
+      DATABASE_URL: postgres://postgres:werkstatt@db:5432/shop
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
+    healthcheck:
+      # node:26-slim hat kein curl – node selbst prüft /readyz.
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3000/readyz').then((r) => process.exit(r.ok ? 0 : 1))"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+
+  db:
+    image: postgres:18
+    logging: *logging
+    environment:
+      POSTGRES_PASSWORD: werkstatt
+      POSTGRES_DB: shop
+    volumes:
+      - db-data:/var/lib/postgresql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres", "-d", "shop"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+
+volumes:
+  db-data:
