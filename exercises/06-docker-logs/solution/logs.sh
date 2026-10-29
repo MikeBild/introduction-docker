@@ -3,7 +3,7 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
-# Eine Bestellung erzeugt eine Logzeile, eine ungültige einen 400er.
+# Eine Bestellung erzeugt eine Logzeile.
 curl -fs -X POST http://localhost:3000/orders -H 'content-type: application/json' \
   -d '{"customerId":"c-1","items":[{"productId":"p-zange","quantity":1}]}' >/dev/null
 
