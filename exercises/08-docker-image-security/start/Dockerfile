@@ -2,7 +2,7 @@
 # TODO 1: Ersetz die zweite Stage durch gcr.io/distroless/nodejs26-debian13:nonroot.
 # TODO 2: Distroless startet node schon als Entrypoint: CMD wird zu ["src/main.ts"], USER node entfällt.
 
-# Stage 1: nur die Production Dependencies installieren.
+# Stage 1: nur die Abhängigkeiten für die Produktion installieren.
 FROM node:26-slim AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./

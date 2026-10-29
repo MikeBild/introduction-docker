@@ -14,7 +14,7 @@ describe.skip('02 Image bauen', () => {
     for (const stage of stages) expect(stage.from).toBe('node:26-slim')
   })
 
-  it('installiert nur Production-Dependencies aus dem Lockfile', () => {
+  it('installiert nur die Abhängigkeiten für die Produktion aus dem Lockfile', () => {
     const runs = stages.flatMap((stage) => stage.instructions.filter((i) => i.cmd === 'RUN').map((i) => i.args))
     expect(runs.some((args) => args.includes('npm ci --omit=dev'))).toBe(true)
   })

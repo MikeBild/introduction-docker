@@ -1,7 +1,7 @@
 # Logs gehören nach stdout: Docker sammelt sie, der Driver local rotiert sie.
 # TODO 1: Leg unter x-logging einen YAML-Anker an: driver local, max-size 10m, max-file 3.
 # TODO 2: Gib api und db mit logging: *logging diese Konfiguration.
-# TODO 3: Ergänze logs.sh: alle Logs live, nur api mit Zeitstempel, nur Fehler mit jq.
+# TODO 3: Ergänze logs.sh: alle Services, nur api mit Zeitstempel, nur „order placed“ per jq, LogConfig per docker inspect.
 name: werkstatt-shop
 
 services:

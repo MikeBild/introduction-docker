@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-# Stage 1: nur die Production Dependencies installieren.
+# Stage 1: nur die Abhängigkeiten für die Produktion installieren.
 FROM node:26-slim AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./
