@@ -25,7 +25,7 @@ Ohne Angabe nutzt Docker den Driver `json-file` ohne Rotation. Für den ganzen H
 
 `jq` installierst du mit `brew install jq` oder `apt install jq`.
 
-Entferne in `start/test/logs.test.ts` das `.skip` und führe `npx vitest exercises/06/start` aus.
+Entferne in `start/test/logs.test.ts` das `.skip` und führe `npx vitest exercises/06-docker-logs/start` aus.
 
 ## Lösung
 

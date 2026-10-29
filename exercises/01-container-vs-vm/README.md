@@ -23,7 +23,7 @@ bash run.sh
 - `memory.max` zeigt `268435456`, `cpu.max` zeigt `50000 100000`.
 - Ab Werk läuft der Prozess als `root` – das änderst du in der Lektion zu Images.
 
-Entferne in `start/test/run.test.ts` das `.skip` und führe `npx vitest exercises/01/start` aus.
+Entferne in `start/test/run.test.ts` das `.skip` und führe `npx vitest exercises/01-container-vs-vm/start` aus.
 
 ## Lösung
 

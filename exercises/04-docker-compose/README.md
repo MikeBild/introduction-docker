@@ -28,7 +28,7 @@ docker compose down -v     # auch das Volume weg
 
 Beobachte direkt nach `up` einmal `curl localhost:3000/readyz`: Die API läuft schon, Postgres vielleicht noch nicht. Das löst die nächste Übung.
 
-Entferne in `start/test/compose.test.ts` das `.skip` und führe `npx vitest exercises/04/start` aus.
+Entferne in `start/test/compose.test.ts` das `.skip` und führe `npx vitest exercises/04-docker-compose/start` aus.
 
 ## Lösung
 

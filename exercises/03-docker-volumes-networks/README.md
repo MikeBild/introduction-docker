@@ -25,7 +25,7 @@ bash cleanup.sh   # räumt Container, Netz und Volume ab
 
 Ab Postgres 18 liegt das Volume des offiziellen Images unter `/var/lib/postgresql`, nicht mehr unter `/var/lib/postgresql/data`. Die Daten stehen darin in einem Unterordner je Major-Version.
 
-Entferne in `start/test/run.test.ts` das `.skip` und führe `npx vitest exercises/03/start` aus.
+Entferne in `start/test/run.test.ts` das `.skip` und führe `npx vitest exercises/03-docker-volumes-networks/start` aus.
 
 ## Lösung
 

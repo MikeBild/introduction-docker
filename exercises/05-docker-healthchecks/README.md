@@ -26,7 +26,7 @@ docker compose down -v
 
 Der Healthcheck schützt nur den Start. Fällt Postgres später aus, muss die API das selbst vertragen: Hier meldet `/readyz` dann 503, und postgres.js verbindet sich beim nächsten Query neu.
 
-Entferne in `start/test/compose.test.ts` das `.skip` und führe `npx vitest exercises/05/start` aus.
+Entferne in `start/test/compose.test.ts` das `.skip` und führe `npx vitest exercises/05-docker-healthchecks/start` aus.
 
 ## Lösung
 

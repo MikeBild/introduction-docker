@@ -36,7 +36,7 @@ docker run --rm --entrypoint id shop-api:1.0.0
 
 Node.js 26 führt TypeScript direkt aus. Deshalb braucht das Image keinen Build-Schritt mit `tsc`.
 
-Entferne in `start/test/dockerfile.test.ts` das `.skip` und führe `npx vitest exercises/02/start` aus.
+Entferne in `start/test/dockerfile.test.ts` das `.skip` und führe `npx vitest exercises/02-docker-image-build/start` aus.
 
 ## Lösung
 

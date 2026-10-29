@@ -25,7 +25,7 @@ docker compose down -v
 
 Die Zahlen ändern sich täglich, weil neue CVEs bekannt werden. Scanne deshalb in der CI bei jedem Build und regelmäßig auch Images, die schon in der Registry liegen. Alternativ zu Trivy zeigt `docker scout cves shop-api:1.1.0` dieselbe Art Bericht.
 
-Entferne in `start/test/security.test.ts` das `.skip` und führe `npx vitest exercises/08/start` aus.
+Entferne in `start/test/security.test.ts` das `.skip` und führe `npx vitest exercises/08-docker-image-security/start` aus.
 
 ## Lösung
 

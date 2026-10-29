@@ -25,7 +25,7 @@ Docker spricht mit `localhost` auch ohne TLS. Jeder andere Registry-Host braucht
 
 Port 5000 belegt unter macOS der AirPlay-Empfänger. Deshalb nutzt die Übung auf dem Host Port 5001, im Container bleibt es 5000.
 
-Entferne in `start/test/registry.test.ts` das `.skip` und führe `npx vitest exercises/07/start` aus.
+Entferne in `start/test/registry.test.ts` das `.skip` und führe `npx vitest exercises/07-docker-registry/start` aus.
 
 ## Lösung
 
