@@ -95,6 +95,10 @@ docker image prune                           # verwaiste Images
 
 - Workshop: [„Docker & Kubernetes“](https://workshops.mikebild.dev/w/docker-kubernetes/remote/)
 - Folien: [slides.mikebild.dev/introduction-docker](https://slides.mikebild.dev/introduction-docker.html)
+- Beiträge auf mikebild.dev:
+  - [Node.js und Redis mit Docker Compose](https://www.mikebild.dev/de/blog/docker-compose-nodejs-redis/)
+  - [Zentrales Logging mit dem ELK-Stack in Docker](https://www.mikebild.dev/de/blog/docker-logging-mit-elk/)
+  - [Eine eigene Docker Registry betreiben](https://www.mikebild.dev/de/blog/docker-eigene-registry/)
 
 ## Archiv
 
