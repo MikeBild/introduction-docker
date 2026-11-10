@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
-# Logs aller Services lesen, filtern und prüfen, welcher Driver sie speichert.
+# Read the logs of all services, filter them and check which driver stores them.
 set -euo pipefail
 cd "$(dirname "$0")"
 
-# Eine Bestellung erzeugt eine Logzeile.
+# One order produces one log line.
 curl -fs -X POST http://localhost:3000/orders -H 'content-type: application/json' \
   -d '{"customerId":"c-1","items":[{"productId":"p-zange","quantity":1}]}' >/dev/null
 
-# Alle Services, mit Servicenamen als Präfix, die letzten 20 Zeilen.
+# All services, with the service name as prefix, the last 20 lines.
 docker compose logs --tail 20
 
-# Nur die API, mit Zeitstempel von Docker, seit zehn Minuten.
+# Only the API, with timestamps from Docker, since ten minutes ago.
 docker compose logs -t --since 10m api
 
-# Ohne Präfix ist jede Zeile reines JSON – jq filtert nach Feldern statt nach Text.
+# Without the prefix every line is pure JSON – jq filters by fields instead of text.
 docker compose logs --no-log-prefix api | jq -c 'select(.msg == "order placed")'
 
-# Welcher Driver ist aktiv, mit welchen Optionen?
+# Which driver is active, with which options?
 docker inspect --format '{{json .HostConfig.LogConfig}}' werkstatt-shop-api-1

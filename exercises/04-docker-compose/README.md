@@ -1,35 +1,37 @@
-# 04 · Compose beschreibt den ganzen Stack
+*English · [Deutsch](README.de.md)*
 
-Lektion `docker-compose`. Du ersetzt die Befehle aus Übung 03 durch eine `compose.yaml`: Werkstatt-Shop-API mit Express 5 und Postgres 18.
+# 04 · Compose describes the whole stack
 
-## Aufgabe
+Lesson `docker-compose`. You replace the commands from exercise 03 with a `compose.yaml`: the workshop shop API with Express 5 and Postgres 18.
 
-Ergänze [`start/compose.yaml`](start/compose.yaml):
+## Task
 
-1. `api`: `DATABASE_URL` mit dem Hostnamen `db`, Port `3000:3000`, `depends_on: [db]`.
-2. `db`: `postgres:18`, Passwort und Datenbank über `environment`, Named Volume `db-data` nach `/var/lib/postgresql`, `./db/init.sql` read-only nach `/docker-entrypoint-initdb.d/`. Keine `ports`.
-3. `db-data` unter `volumes` auf oberster Ebene deklarieren.
+Complete [`start/compose.yaml`](start/compose.yaml):
+
+1. `api`: `DATABASE_URL` with the hostname `db`, port `3000:3000`, `depends_on: [db]`.
+2. `db`: `postgres:18`, password and database via `environment`, named volume `db-data` at `/var/lib/postgresql`, `./db/init.sql` read-only at `/docker-entrypoint-initdb.d/`. No `ports`.
+3. Declare `db-data` under `volumes` at the top level.
 
 ```bash
 cd exercises/04-docker-compose/start
 docker compose up -d --build
 docker compose ps
 curl localhost:3000/products
-docker compose down        # Container und Netz weg, Volume bleibt
-docker compose down -v     # auch das Volume weg
+docker compose down        # containers and network gone, the volume stays
+docker compose down -v     # the volume gone too
 ```
 
-## Prüfkriterien
+## Acceptance criteria
 
-- `docker compose config` meldet keinen Fehler.
-- `curl localhost:3000/products` liefert drei Produkte.
-- `docker compose ps` zeigt für `db` keinen veröffentlichten Port.
-- Nach `down` und `up` sind Bestellungen noch da, nach `down -v` nicht mehr.
+- `docker compose config` reports no error.
+- `curl localhost:3000/products` returns three products.
+- `docker compose ps` shows no published port for `db`.
+- After `down` and `up` the orders are still there, after `down -v` they are gone.
 
-Beobachte direkt nach `up` einmal `curl localhost:3000/readyz`: Die API läuft schon, Postgres vielleicht noch nicht. Das löst die nächste Übung.
+Right after `up`, run `curl localhost:3000/readyz` once: the API is already running, Postgres maybe not yet. The next exercise solves that.
 
-Entferne in `start/test/compose.test.ts` das `.skip` und führe `npx vitest exercises/04-docker-compose/start` aus.
+Remove the `.skip` in `start/test/compose.test.ts` and run `npx vitest exercises/04-docker-compose/start`.
 
-## Lösung
+## Solution
 
 [`solution/compose.yaml`](solution/compose.yaml)

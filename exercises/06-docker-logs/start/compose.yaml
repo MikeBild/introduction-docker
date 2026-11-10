@@ -1,7 +1,7 @@
-# Logs gehören nach stdout: Docker sammelt sie, der Driver local rotiert sie.
-# TODO 1: Leg unter x-logging einen YAML-Anker an: driver local, max-size 10m, max-file 3.
-# TODO 2: Gib api und db mit logging: *logging diese Konfiguration.
-# TODO 3: Ergänze logs.sh: alle Services, nur api mit Zeitstempel, nur „order placed“ per jq, LogConfig per docker inspect.
+# Logs belong on stdout: Docker collects them, the driver local rotates them.
+# TODO 1: Add a YAML anchor under x-logging: driver local, max-size 10m, max-file 3.
+# TODO 2: Give api and db this configuration with logging: *logging.
+# TODO 3: Complete logs.sh: all services, only api with timestamps, only “order placed” via jq, LogConfig via docker inspect.
 name: werkstatt-shop
 
 services:
@@ -17,7 +17,7 @@ services:
         condition: service_healthy
         restart: true
     healthcheck:
-      # node:26-slim hat kein curl – node selbst prüft /readyz.
+      # node:26-slim has no curl – node itself checks /readyz.
       test: ["CMD", "node", "-e", "fetch('http://localhost:3000/readyz').then((r) => process.exit(r.ok ? 0 : 1))"]
       interval: 10s
       timeout: 3s

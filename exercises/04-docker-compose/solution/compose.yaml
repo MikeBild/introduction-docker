@@ -1,4 +1,4 @@
-# Der Werkstatt-Shop als ein Stack: API und Postgres.
+# The workshop shop as one stack: API and Postgres.
 name: werkstatt-shop
 
 services:

@@ -1,7 +1,7 @@
-# Gehärteter Stack: Distroless-Image, Dateisystem read-only, keine Capabilities.
+# Hardened stack: Distroless image, read-only file system, no capabilities.
 name: werkstatt-shop
 
-# Eine Logging-Konfiguration für alle Services, per YAML-Anker wiederverwendet.
+# One logging configuration for all services, reused through a YAML anchor.
 x-logging: &logging
   driver: local
   options:
@@ -25,7 +25,7 @@ services:
         condition: service_healthy
         restart: true
     healthcheck:
-      # Distroless hat weder Shell noch curl – node selbst prüft /readyz.
+      # Distroless has neither a shell nor curl – node itself checks /readyz.
       test: ["CMD", "/nodejs/bin/node", "-e", "fetch('http://localhost:3000/readyz').then((r) => process.exit(r.ok ? 0 : 1))"]
       interval: 10s
       timeout: 3s

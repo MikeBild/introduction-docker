@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
-# Ein Container ist ein Prozess auf dem Kernel des Hosts – keine eigene Maschine.
+# A container is a process on the kernel of the host – not a machine of its own.
 set -euo pipefail
 
-# 1. Der Prozess im Container hat die PID 1: Er ist der einzige Prozess in seinem Namespace.
+# 1. The process in the container has PID 1: it is the only process in its namespace.
 docker run --rm node:26-slim node -e "console.log('PID', process.pid, 'Node', process.version)"
 
-# 2. Gleicher Kernel: Container bringen keinen eigenen Kernel mit.
-#    Auf macOS und Windows ist das der Kernel der Linux-VM von Docker Desktop.
+# 2. Same kernel: containers do not bring a kernel of their own.
+#    On macOS and Windows that is the kernel of the Linux VM of Docker Desktop.
 docker run --rm node:26-slim uname -r
 
-# 3. Grenzen setzt der Kernel über cgroups: 256 MiB Speicher, eine halbe CPU.
+# 3. The kernel enforces limits through cgroups: 256 MiB of memory, half a CPU.
 docker run --rm --memory 256m --cpus 0.5 node:26-slim \
   cat /sys/fs/cgroup/memory.max /sys/fs/cgroup/cpu.max
 
-# 4. Ab Werk läuft der Prozess als root – das ändert die Lektion zu Images.
+# 4. By default the process runs as root – the lesson on images changes that.
 docker run --rm node:26-slim id

@@ -1,4 +1,4 @@
-# Was nicht ins Image gehört, kommt gar nicht erst in den Build Context.
+# What does not belong in the image never enters the build context.
 node_modules
 test
 db

@@ -1,4 +1,4 @@
-# Gestartet heißt noch nicht bereit: Healthchecks für API und Postgres.
+# Started does not mean ready: healthchecks for the API and Postgres.
 name: werkstatt-shop
 
 services:
@@ -14,7 +14,7 @@ services:
         condition: service_healthy
         restart: true
     healthcheck:
-      # node:26-slim hat kein curl – node selbst prüft /readyz.
+      # node:26-slim has no curl – node itself checks /readyz.
       test: ["CMD", "node", "-e", "fetch('http://localhost:3000/readyz').then((r) => process.exit(r.ok ? 0 : 1))"]
       interval: 10s
       timeout: 3s

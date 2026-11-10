@@ -1,32 +1,34 @@
-# 03 · Daten und Netze leben außerhalb des Containers
+*English · [Deutsch](README.de.md)*
 
-Lektion `docker-volumes-networks`. Du verbindest die Werkstatt-Shop-API von Hand mit Postgres: über ein eigenes Netz und ein Named Volume.
+# 03 · Data and networks live outside the container
 
-## Aufgabe
+Lesson `docker-volumes-networks`. You connect the workshop shop API to Postgres by hand: through a network of its own and a named volume.
 
-Ergänze [`start/run.sh`](start/run.sh):
+## Task
 
-1. Bridge-Netz `shop-net` und Named Volume `shop-db` anlegen.
-2. `postgres:18` als Container `db` im Netz starten, Volume nach `/var/lib/postgresql`, `db/init.sql` nach `/docker-entrypoint-initdb.d/`. Kein `-p`.
-3. `shop-api:1.0.0` bauen und als Container `api` mit `-p 3000:3000` und `DATABASE_URL=postgres://postgres:werkstatt@db:5432/shop` starten.
-4. Eine Bestellung anlegen, `db` löschen, mit demselben Volume neu starten und die Bestellung wieder abfragen.
+Complete [`start/run.sh`](start/run.sh):
+
+1. Create the bridge network `shop-net` and the named volume `shop-db`.
+2. Start `postgres:18` as container `db` in the network, volume at `/var/lib/postgresql`, `db/init.sql` at `/docker-entrypoint-initdb.d/`. No `-p`.
+3. Build `shop-api:1.0.0` and start it as container `api` with `-p 3000:3000` and `DATABASE_URL=postgres://postgres:werkstatt@db:5432/shop`.
+4. Place an order, remove `db`, start it again with the same volume and query the order again.
 
 ```bash
 cd exercises/03-docker-volumes-networks/start
 bash run.sh
-bash cleanup.sh   # räumt Container, Netz und Volume ab
+bash cleanup.sh   # removes container, network and volume
 ```
 
-## Prüfkriterien
+## Acceptance criteria
 
-- `curl localhost:3000/products` liefert drei Produkte.
-- Nach dem Neustart von `db` liefert `GET /orders` die Bestellung noch.
-- `docker port db` zeigt nichts: Postgres ist nur im Netz `shop-net` erreichbar.
+- `curl localhost:3000/products` returns three products.
+- After the restart of `db`, `GET /orders` still returns the order.
+- `docker port db` shows nothing: Postgres is reachable only inside the network `shop-net`.
 
-Ab Postgres 18 liegt das Volume des offiziellen Images unter `/var/lib/postgresql`, nicht mehr unter `/var/lib/postgresql/data`. Die Daten stehen darin in einem Unterordner je Major-Version.
+Since Postgres 18 the volume of the official image is at `/var/lib/postgresql`, no longer at `/var/lib/postgresql/data`. Inside it, the data sits in a subfolder per major version.
 
-Entferne in `start/test/run.test.ts` das `.skip` und führe `npx vitest exercises/03-docker-volumes-networks/start` aus.
+Remove the `.skip` in `start/test/run.test.ts` and run `npx vitest exercises/03-docker-volumes-networks/start`.
 
-## Lösung
+## Solution
 
 [`solution/run.sh`](solution/run.sh)

@@ -1,10 +1,12 @@
-# 02 · Ein gutes Image entsteht in mehreren Stages
+*English · [Deutsch](README.de.md)*
 
-Lektion `docker-image-build`. Du machst aus einem naiven Dockerfile ein kleines, reproduzierbares Image für die Werkstatt-Shop-API, das nicht als root läuft.
+# 02 · A good image is built in several stages
 
-## Aufgabe
+Lesson `docker-image-build`. You turn a naive Dockerfile into a small, reproducible image for the workshop shop API that does not run as root.
 
-Bau das Image aus [`start/`](start) und notier Größe und User:
+## Task
+
+Build the image from [`start/`](start) and note its size and user:
 
 ```bash
 cd exercises/02-docker-image-build/start
@@ -13,13 +15,13 @@ docker image ls shop-api
 docker run --rm --entrypoint id shop-api:naiv
 ```
 
-Verbessere dann [`start/Dockerfile`](start/Dockerfile) und leg eine `.dockerignore` an:
+Then improve [`start/Dockerfile`](start/Dockerfile) and add a `.dockerignore`:
 
-1. Base-Image `node:26-slim` statt `node:latest`.
-2. Stage `deps` mit `npm ci --omit=dev`; die zweite Stage kopiert nur `node_modules`, `package.json` und `src`.
-3. Lockfile vor dem Quellcode kopieren, damit der Layer mit den Dependencies im Cache bleibt.
-4. `USER node` und `CMD ["node", "src/main.ts"]`.
-5. `.dockerignore` mit `node_modules`, `test`, `.git` und `.env*`.
+1. Base image `node:26-slim` instead of `node:latest`.
+2. Stage `deps` with `npm ci --omit=dev`; the second stage copies only `node_modules`, `package.json` and `src`.
+3. Copy the lockfile before the source code so the layer with the dependencies stays in the cache.
+4. `USER node` and `CMD ["node", "src/main.ts"]`.
+5. `.dockerignore` with `node_modules`, `test`, `.git` and `.env*`.
 
 ```bash
 docker build -t shop-api:1.0.0 .
@@ -28,16 +30,16 @@ docker history shop-api:1.0.0
 docker run --rm --entrypoint id shop-api:1.0.0
 ```
 
-## Prüfkriterien
+## Acceptance criteria
 
-- Das Image ist deutlich kleiner als `shop-api:naiv`.
-- `id` zeigt `uid=1000(node)`.
-- Änderst du nur `src/app.ts`, baut Docker die Dependencies nicht neu (`CACHED` im Build-Log).
+- The image is considerably smaller than `shop-api:naiv`.
+- `id` shows `uid=1000(node)`.
+- If you change only `src/app.ts`, Docker does not rebuild the dependencies (`CACHED` in the build log).
 
-Node.js 26 führt TypeScript direkt aus. Deshalb braucht das Image keinen Build-Schritt mit `tsc`.
+Node.js 26 runs TypeScript directly. That is why the image needs no build step with `tsc`.
 
-Entferne in `start/test/dockerfile.test.ts` das `.skip` und führe `npx vitest exercises/02-docker-image-build/start` aus.
+Remove the `.skip` in `start/test/dockerfile.test.ts` and run `npx vitest exercises/02-docker-image-build/start`.
 
-## Lösung
+## Solution
 
-[`solution/Dockerfile`](solution/Dockerfile) und [`solution/.dockerignore`](solution/.dockerignore)
+[`solution/Dockerfile`](solution/Dockerfile) and [`solution/.dockerignore`](solution/.dockerignore)

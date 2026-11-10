@@ -1,10 +1,10 @@
-# Gehärteter Stack: Distroless-Image, Dateisystem read-only, keine Capabilities.
-# TODO 4: Setz das Image von api auf shop-api:1.1.0.
-# TODO 5: api bekommt read_only: true, cap_drop: [ALL] und security_opt: ["no-new-privileges:true"].
-# TODO 6: Der Healthcheck braucht im Distroless-Image den vollen Pfad /nodejs/bin/node.
+# Hardened stack: Distroless image, read-only file system, no capabilities.
+# TODO 4: Set the image of api to shop-api:1.1.0.
+# TODO 5: api gets read_only: true, cap_drop: [ALL] and security_opt: ["no-new-privileges:true"].
+# TODO 6: In the Distroless image the healthcheck needs the full path /nodejs/bin/node.
 name: werkstatt-shop
 
-# Eine Logging-Konfiguration für alle Services, per YAML-Anker wiederverwendet.
+# One logging configuration for all services, reused through a YAML anchor.
 x-logging: &logging
   driver: local
   options:
@@ -25,7 +25,7 @@ services:
         condition: service_healthy
         restart: true
     healthcheck:
-      # node:26-slim hat kein curl – node selbst prüft /readyz.
+      # node:26-slim has no curl – node itself checks /readyz.
       test: ["CMD", "node", "-e", "fetch('http://localhost:3000/readyz').then((r) => process.exit(r.ok ? 0 : 1))"]
       interval: 10s
       timeout: 3s

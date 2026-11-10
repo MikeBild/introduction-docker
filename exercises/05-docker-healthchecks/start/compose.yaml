@@ -1,8 +1,8 @@
-# Gestartet heißt noch nicht bereit: Healthchecks für API und Postgres.
-# TODO 1: db bekommt einen healthcheck mit pg_isready -U postgres -d shop (interval 5s, retries 10).
-# TODO 2: api wartet per depends_on mit condition: service_healthy auf db.
-# TODO 3: api bekommt einen healthcheck auf /readyz. node:26-slim hat kein curl – nimm node -e mit fetch.
-# TODO 4: Starte mit docker compose up -d --wait und beobachte docker compose ps.
+# Started does not mean ready: healthchecks for the API and Postgres.
+# TODO 1: db gets a healthcheck with pg_isready -U postgres -d shop (interval 5s, retries 10).
+# TODO 2: api waits for db through depends_on with condition: service_healthy.
+# TODO 3: api gets a healthcheck on /readyz. node:26-slim has no curl – use node -e with fetch.
+# TODO 4: Start with docker compose up -d --wait and watch docker compose ps.
 name: werkstatt-shop
 
 services:

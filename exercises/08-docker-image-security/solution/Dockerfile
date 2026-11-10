@@ -1,13 +1,13 @@
 # syntax=docker/dockerfile:1
 
-# Stage 1: Dependencies mit npm installieren – npm und Shell bleiben in dieser Stage.
+# Stage 1: install the dependencies with npm – npm and the shell stay in this stage.
 FROM node:26-slim AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN --mount=type=cache,target=/root/.npm npm ci --omit=dev
 
-# Stage 2: Distroless – nur Node.js und seine Bibliotheken, keine Shell, kein Paketmanager.
-# Das Tag nonroot startet als User 65532. Der Entrypoint ist bereits node.
+# Stage 2: Distroless – only Node.js and its libraries, no shell, no package manager.
+# The tag nonroot runs as user 65532. The entrypoint is already node.
 FROM gcr.io/distroless/nodejs26-debian13:nonroot
 ENV NODE_ENV=production
 WORKDIR /app

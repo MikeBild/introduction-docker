@@ -1,110 +1,112 @@
-# Übungen: Docker
+*English · [Deutsch](README.de.md)*
 
-Übungs-Repo zum Docker-Teil des Workshops „Docker & Kubernetes“. Zu jeder Docker-Lektion gibt es eine Übung mit Startpunkt, Tests und Lösung. Alle Übungen drehen sich um dieselbe Anwendung, die Werkstatt-Shop-API: Produkte, Bestellungen mit Positionen aus `productId`, `quantity` und `priceCents`, Geld immer in ganzen Cent.
+# Exercises: Docker
 
-## Was du lernst
+Exercise repository for the Docker part of the workshop “Docker & Kubernetes”. Every Docker lesson comes with an exercise that has a starting point, tests and a solution. All exercises revolve around the same application, the workshop shop API: products, orders with items made of `productId`, `quantity` and `priceCents`, money always in whole cents.
 
-- Container als Prozess verstehen und schlanke Images in mehreren Stages bauen
-- Stacks mit Volumes, Netzen, Compose und Healthchecks zuverlässig starten
-- Logs lesen, Images über eine Registry verteilen und mit Trivy prüfen
+## What you learn
 
-## Voraussetzungen
+- Understand a container as a process and build lean images in several stages
+- Start stacks reliably with volumes, networks, Compose and healthchecks
+- Read logs, distribute images through a registry and check them with Trivy
 
-- **Docker** – Docker Desktop oder Docker Engine mit Compose-Plugin. Prüf die Versionen:
+## Prerequisites
+
+- **Docker** – Docker Desktop or Docker Engine with the Compose plugin. Check the versions:
 
   ```bash
   docker version
   docker compose version
   ```
 
-- **Node.js 26** – `nvm use` liest die Version aus [`.nvmrc`](.nvmrc).
-- **jq** und **Trivy** für die Übungen 06 und 08: `brew install jq trivy`.
+- **Node.js 26** – `nvm use` reads the version from [`.nvmrc`](.nvmrc).
+- **jq** and **Trivy** for exercises 06 and 08: `brew install jq trivy`.
 
-**Stack (Oktober 2026):** Docker Engine 29 mit Compose v5 · Node.js 26 (`node:26-slim`, Distroless `nodejs26-debian13`) · Express 5 · Postgres 18 · `registry:3` · Trivy · TypeScript strict als ESM · Vitest
+**Stack (October 2026):** Docker Engine 29 with Compose v5 · Node.js 26 (`node:26-slim`, Distroless `nodejs26-debian13`) · Express 5 · Postgres 18 · `registry:3` · Trivy · TypeScript strict as ESM · Vitest
 
-## Einrichten
+## Setup
 
 ```bash
 git clone https://github.com/MikeBild/introduction-docker.git
 cd introduction-docker
 npm ci
-npm run check        # tsc, Vitest und Abgleich der App-Kopien – ohne Docker
+npm run check        # tsc, Vitest and comparison of the app copies – no Docker needed
 ```
 
-## So arbeitest du mit einer Übung
+## How to work on an exercise
 
-1. **Startpunkt:** Wechsle mit `cd exercises/<nr>/start` in den Startpunkt. Dort findest du TODO-Kommentare und eine Kopie der App; `docker build .` reicht, jede Übung ist eigenständig.
-2. **Tests:** Entferne in `start/test/*.test.ts` das `.skip` und führe `npx vitest exercises/<nr>/start` aus. Die Tests lesen Dockerfile, Compose-Datei und Skripte und prüfen die wichtigen Entscheidungen. Sie brauchen kein Docker. Ob ein Stack wirklich startet, zeigt dir `docker compose up --wait`; die CI tut das für die Übungen 03, 05 und 08.
-3. **Lösung:** In `solution/` liegt eine mögliche Lösung mit derselben Struktur.
+1. **Starting point:** Change into the starting point with `cd exercises/<nr>/start`. There you find TODO comments and a copy of the app; `docker build .` is enough, every exercise is self-contained.
+2. **Tests:** Remove the `.skip` in `start/test/*.test.ts` and run `npx vitest exercises/<nr>/start`. The tests read the Dockerfile, the Compose file and the scripts and check the important decisions. They do not need Docker. Whether a stack really starts is shown by `docker compose up --wait`; the CI does that for exercises 03, 05 and 08.
+3. **Solution:** `solution/` holds one possible solution with the same structure.
 
-Jede Übung baut auf der vorherigen auf: Der Startpunkt von 05 ist die Lösung von 04 und so weiter. Du kannst trotzdem bei jeder Nummer einsteigen.
+Every exercise builds on the previous one: the starting point of 05 is the solution of 04, and so on. You can still start at any number.
 
-## Übungen
+## Exercises
 
-| Block | # | Lektion | ID | Übung |
+| Block | # | Lesson | ID | Exercise |
 | --- | --- | --- | --- | --- |
-| Docker | 01 | Ein Container ist ein Prozess, keine VM | `container-vs-vm` | [exercises/01-container-vs-vm](exercises/01-container-vs-vm) |
-| Docker | 02 | Ein gutes Image entsteht in mehreren Stages | `docker-image-build` | [exercises/02-docker-image-build](exercises/02-docker-image-build) |
-| Docker | 03 | Daten und Netze leben außerhalb des Containers | `docker-volumes-networks` | [exercises/03-docker-volumes-networks](exercises/03-docker-volumes-networks) |
-| Docker | 04 | Compose beschreibt den ganzen Stack | `docker-compose` | [exercises/04-docker-compose](exercises/04-docker-compose) |
-| Docker | 05 | Gestartet heißt noch nicht bereit | `docker-healthchecks` | [exercises/05-docker-healthchecks](exercises/05-docker-healthchecks) |
-| Docker | 06 | Logs gehören nach stdout, nicht in Dateien | `docker-logs` | [exercises/06-docker-logs](exercises/06-docker-logs) |
-| Docker | 07 | Ein Image ist erst fertig, wenn es in der Registry liegt | `docker-registry` | [exercises/07-docker-registry](exercises/07-docker-registry) |
-| Sicherheit | 08 | Ein kleines Image hat weniger Lücken | `docker-image-security` | [exercises/08-docker-image-security](exercises/08-docker-image-security) |
+| Docker | 01 | A container is a process, not a VM | `container-vs-vm` | [exercises/01-container-vs-vm](exercises/01-container-vs-vm) |
+| Docker | 02 | A good image is built in several stages | `docker-image-build` | [exercises/02-docker-image-build](exercises/02-docker-image-build) |
+| Docker | 03 | Data and networks live outside the container | `docker-volumes-networks` | [exercises/03-docker-volumes-networks](exercises/03-docker-volumes-networks) |
+| Docker | 04 | Compose describes the whole stack | `docker-compose` | [exercises/04-docker-compose](exercises/04-docker-compose) |
+| Docker | 05 | Started does not mean ready | `docker-healthchecks` | [exercises/05-docker-healthchecks](exercises/05-docker-healthchecks) |
+| Docker | 06 | Logs belong on stdout, not in files | `docker-logs` | [exercises/06-docker-logs](exercises/06-docker-logs) |
+| Docker | 07 | An image is only done when it sits in the registry | `docker-registry` | [exercises/07-docker-registry](exercises/07-docker-registry) |
+| Security | 08 | A small image has fewer vulnerabilities | `docker-image-security` | [exercises/08-docker-image-security](exercises/08-docker-image-security) |
 
-Die Übungen zum Kubernetes-Teil des Workshops findest du in [MikeBild/introduction-kubernetes](https://github.com/MikeBild/introduction-kubernetes).
+The exercises for the Kubernetes part of the workshop are in [MikeBild/introduction-kubernetes](https://github.com/MikeBild/introduction-kubernetes).
 
-## Aufbau
+## Layout
 
 ```text
-app/                     Werkstatt-Shop-API: Express 5, postgres.js, zod
-  src/main.ts            Start, Graceful Shutdown bei SIGTERM
-  src/app.ts             Routen: /products, /orders, /livez, /readyz, /version
-  db/init.sql            Tabellen und drei Produkte
+app/                     workshop shop API: Express 5, postgres.js, zod
+  src/main.ts            startup, graceful shutdown on SIGTERM
+  src/app.ts             routes: /products, /orders, /livez, /readyz, /version
+  db/init.sql            tables and three products
 exercises/
   02-docker-image-build/
-    README.md            Aufgabe, Ablauf, Prüfkriterien
-    start/               dein Startpunkt mit TODO-Kommentaren und einer Kopie der App
-      test/*.test.ts     Tests mit describe.skip
-    solution/            eine mögliche Lösung, gleiche Struktur
-legacy/2018/             das Material von 2018, nur als Archiv
+    README.md            task, steps, acceptance criteria
+    start/               your starting point with TODO comments and a copy of the app
+      test/*.test.ts     tests with describe.skip
+    solution/            one possible solution, same structure
+archive/2018/            the material from 2018, kept as an archive only
 ```
 
-Die App liegt als Kopie in jedem Startpunkt und jeder Lösung. Änderst du `app/`, verteilt `npm run sync` die Kopien neu; `npm run check` meldet veraltete Kopien.
+The app is copied into every starting point and every solution. If you change `app/`, `npm run sync` redistributes the copies; `npm run check` reports outdated copies.
 
-## Pakete
+## Packages
 
-Die App nutzt drei Pakete, jedes mit einem Grund:
+The app uses three packages, each for a reason:
 
-- `express` 5 – HTTP-Routing; Fehler aus asynchronen Handlern landen ohne Zusatzpaket im Error-Handler.
-- `postgres` (postgres.js) – SQL als Tagged Template, Parameter nie im SQL-Text, Pool und Transaktionen eingebaut.
-- `zod` 4 – dasselbe Schema für Bestellungen wie im Frontend des Werkstatt-Shops.
+- `express` 5 – HTTP routing; errors from async handlers reach the error handler without an extra package.
+- `postgres` (postgres.js) – SQL as a tagged template, parameters never in the SQL text, pool and transactions built in.
+- `zod` 4 – the same schema for orders as in the frontend of the workshop shop.
 
-Dazu für die Entwicklung: `typescript`, `vitest`, `@types/node`, `@types/express` und `yaml` für die Tests der Compose-Dateien.
+For development: `typescript`, `vitest`, `@types/node`, `@types/express` and `yaml` for the tests of the Compose files.
 
-## Aufräumen
+## Cleanup
 
 ```bash
-docker compose down -v                       # im jeweiligen Übungsordner
+docker compose down -v                       # in the respective exercise folder
 bash exercises/03-docker-volumes-networks/solution/cleanup.sh
 docker rm -f registry && docker volume rm registry-data
-docker image prune                           # verwaiste Images
+docker image prune                           # dangling images
 ```
 
-## Workshop und Folien
+## Workshop and slides
 
-- Workshop: [„Docker & Kubernetes“](https://workshops.mikebild.dev/w/docker-kubernetes/remote/)
-- Folien: [slides.mikebild.dev/introduction-docker](https://slides.mikebild.dev/introduction-docker.html)
+- Workshop: [“Docker & Kubernetes”](https://workshops.mikebild.dev/w/docker-kubernetes/remote/)
+- Slides: [slides.mikebild.dev/introduction-docker](https://slides.mikebild.dev/introduction-docker.html)
 - PDF: [slides.mikebild.dev/introduction-docker.pdf](https://slides.mikebild.dev/introduction-docker.pdf)
-- Beiträge auf mikebild.dev:
+- Articles on mikebild.dev (in German):
   - [Node.js und Redis mit Docker Compose](https://www.mikebild.dev/de/blog/docker-compose-nodejs-redis/)
   - [Zentrales Logging mit dem ELK-Stack in Docker](https://www.mikebild.dev/de/blog/docker-logging-mit-elk/)
   - [Eine eigene Docker Registry betreiben](https://www.mikebild.dev/de/blog/docker-eigene-registry/)
 
-## Archiv
+## Archive
 
-Die erste Fassung von 2018 (Docker Machine, Swarm, Compose-Datei mit `version: '3'`, Node.js mit Yarn) liegt unverändert als Archiv unter [`legacy/2018/`](legacy/2018/) und wird weder gebaut noch getestet.
+The first version from 2018 (Docker Machine, Swarm, Compose file with `version: '3'`, Node.js with Yarn) is kept unchanged as an archive under [`archive/2018/`](archive/2018/) and is neither built nor tested.
 
-## Lizenz
+## License
 
 [MIT](LICENSE)

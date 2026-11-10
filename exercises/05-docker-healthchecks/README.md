@@ -1,14 +1,16 @@
-# 05 · Gestartet heißt noch nicht bereit
+*English · [Deutsch](README.de.md)*
 
-Lektion `docker-healthchecks`. Du gibst API und Postgres einen Healthcheck und lässt Compose warten, bis beide wirklich bereit sind.
+# 05 · Started does not mean ready
 
-## Aufgabe
+Lesson `docker-healthchecks`. You give the API and Postgres a healthcheck and let Compose wait until both are really ready.
 
-Ergänze [`start/compose.yaml`](start/compose.yaml):
+## Task
 
-1. `db`: `healthcheck` mit `pg_isready -U postgres -d shop`.
-2. `api`: `depends_on` in der Langform mit `condition: service_healthy`.
-3. `api`: `healthcheck` auf `/readyz`. `node:26-slim` hat kein `curl`, deshalb prüft `node -e` mit `fetch`.
+Complete [`start/compose.yaml`](start/compose.yaml):
+
+1. `db`: `healthcheck` with `pg_isready -U postgres -d shop`.
+2. `api`: `depends_on` in the long form with `condition: service_healthy`.
+3. `api`: `healthcheck` on `/readyz`. `node:26-slim` has no `curl`, so `node -e` checks with `fetch`.
 
 ```bash
 cd exercises/05-docker-healthchecks/start
@@ -18,16 +20,16 @@ docker inspect --format '{{json .State.Health}}' werkstatt-shop-api-1
 docker compose down -v
 ```
 
-## Prüfkriterien
+## Acceptance criteria
 
-- `up --wait` kehrt erst zurück, wenn beide Services `healthy` sind.
-- `docker compose ps` zeigt `(healthy)` bei `api` und `db`.
-- Stoppst du `db` mit `docker compose stop db`, wird `api` nach drei Fehlversuchen `unhealthy`.
+- `up --wait` returns only when both services are `healthy`.
+- `docker compose ps` shows `(healthy)` for `api` and `db`.
+- If you stop `db` with `docker compose stop db`, `api` turns `unhealthy` after three failed attempts.
 
-Der Healthcheck schützt nur den Start. Fällt Postgres später aus, muss die API das selbst vertragen: Hier meldet `/readyz` dann 503, und postgres.js verbindet sich bei der nächsten Abfrage neu.
+The healthcheck protects only the startup. If Postgres fails later, the API has to cope with that itself: here `/readyz` then returns 503, and postgres.js reconnects on the next query.
 
-Entferne in `start/test/compose.test.ts` das `.skip` und führe `npx vitest exercises/05-docker-healthchecks/start` aus.
+Remove the `.skip` in `start/test/compose.test.ts` and run `npx vitest exercises/05-docker-healthchecks/start`.
 
-## Lösung
+## Solution
 
 [`solution/compose.yaml`](solution/compose.yaml)

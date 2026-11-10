@@ -3,30 +3,30 @@ import { script } from '../../../../scripts/lib/files.ts'
 
 const run = script(`${import.meta.dirname}/..`, 'run.sh')
 
-describe('03 Volumes und Netze', () => {
-  it('legt ein eigenes Netz und ein Named Volume an', () => {
+describe('03 Volumes and networks', () => {
+  it('creates a network of its own and a named volume', () => {
     expect(run).toMatch(/docker network create shop-net/)
     expect(run).toMatch(/docker volume create shop-db/)
   })
 
-  it('startet Postgres 18 im Netz mit dem Volume unter /var/lib/postgresql', () => {
+  it('starts Postgres 18 in the network with the volume at /var/lib/postgresql', () => {
     expect(run).toMatch(/--name db --network shop-net/)
     expect(run).toMatch(/-v shop-db:\/var\/lib\/postgresql\s/)
     expect(run).toContain('postgres:18')
   })
 
-  it('veröffentlicht keinen Port für Postgres', () => {
+  it('publishes no port for Postgres', () => {
     const db = run.split('\n').filter((line) => line.includes('--name db'))
     expect(db.length).toBeGreaterThan(0)
     for (const line of db) expect(line).not.toMatch(/\s-p\s/)
   })
 
-  it('verbindet die API über den Containernamen db', () => {
+  it('connects the API through the container name db', () => {
     expect(run).toMatch(/--name api --network shop-net -p 3000:3000/)
     expect(run).toContain('@db:5432/shop')
   })
 
-  it('startet Postgres mit demselben Volume neu', () => {
+  it('restarts Postgres with the same volume', () => {
     expect(run).toMatch(/docker rm -f db/)
     expect(run.match(/-v shop-db:\/var\/lib\/postgresql/g)?.length).toBeGreaterThanOrEqual(2)
   })

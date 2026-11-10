@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { parse } from 'yaml'
 
-// Kleine Helfer für die Tests der Übungen: Dockerfile, Compose-Datei und Shell-Skripte lesen.
+// Small helpers for the exercise tests: read the Dockerfile, the Compose file and shell scripts.
 
 export type Instruction = { cmd: string; args: string }
 export type Stage = { from: string; name?: string; instructions: Instruction[] }
@@ -13,7 +13,7 @@ export const read = (dir: string, file: string): string => {
   return readFileSync(path, 'utf8')
 }
 
-// Zerlegt ein Dockerfile in Anweisungen: Kommentare raus, Zeilenfortsetzungen zusammenziehen.
+// Splits a Dockerfile into instructions: drop comments, join line continuations.
 export const parseDockerfile = (text: string): Instruction[] =>
   text
     .replace(/\\\r?\n/g, ' ')
@@ -52,7 +52,7 @@ export const dockerignore = (dir: string): string[] =>
     .map((line) => line.trim())
     .filter((line) => line && !line.startsWith('#'))
 
-// Compose-Datei als Objekt. Die Typen bleiben bewusst locker, die Tests prüfen Felder einzeln.
+// Compose file as an object. The types stay deliberately loose, the tests check fields one by one.
 export type Service = {
   image?: string
   build?: string | { context?: string; dockerfile?: string; args?: Record<string, string> }
@@ -80,7 +80,7 @@ export type Compose = {
 
 export const compose = (dir: string, file = 'compose.yaml'): Compose => parse(read(dir, file)) as Compose
 
-// Shell-Skript ohne Kommentare und mit zusammengezogenen Zeilenfortsetzungen.
+// Shell script without comments and with line continuations joined.
 export const script = (dir: string, file: string): string =>
   read(dir, file)
     .replace(/\\\r?\n/g, ' ')

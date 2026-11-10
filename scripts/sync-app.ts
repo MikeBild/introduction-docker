@@ -1,8 +1,8 @@
-// Kopiert die Werkstatt-Shop-API aus app/ in jede Übung mit Dockerfile
-// und erzeugt die Tests im Startpunkt aus den Tests der Lösung.
-// Jede Übung bleibt so eigenständig: cd exercises/<nr>/start && docker build .
-// Aufruf: npm run sync          kopieren
-//         npm run sync -- --check  nur prüfen, ob alle Kopien aktuell sind
+// Copies the workshop shop API from app/ into every exercise with a Dockerfile
+// and generates the tests of the starting point from the tests of the solution.
+// That keeps every exercise self-contained: cd exercises/<nr>/start && docker build .
+// Usage: npm run sync            copy
+//        npm run sync -- --check  only check whether all copies are current
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { dirname, join, relative } from 'node:path'
 
@@ -28,14 +28,14 @@ const compare = (file: string, expected: string) => {
   }
 }
 
-// Die Tests im Startpunkt sind die Tests der Lösung, nur mit describe.skip.
+// The tests of the starting point are the tests of the solution, only with describe.skip.
 for (const exercise of readdirSync(join(root, 'exercises'))) {
   const tests = join(root, 'exercises', exercise, 'solution', 'test')
   if (!existsSync(tests)) continue
   for (const file of readdirSync(tests)) {
     const skipped = readFileSync(join(tests, file), 'utf8').replace(
       /^describe\(/m,
-      '// Entferne .skip, sobald du mit der Übung beginnst.\ndescribe.skip(',
+      '// Remove .skip as soon as you start the exercise.\ndescribe.skip(',
     )
     const target = join(root, 'exercises', exercise, 'start', 'test', file)
     if (check) compare(target, skipped)

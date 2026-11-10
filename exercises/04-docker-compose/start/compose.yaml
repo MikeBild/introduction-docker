@@ -1,17 +1,17 @@
-# Der Werkstatt-Shop als ein Stack: API und Postgres.
-# Ersetzt die Befehle aus run.sh der Übung 03 durch eine Datei.
+# The workshop shop as one stack: API and Postgres.
+# Replaces the commands from run.sh of exercise 03 with one file.
 name: werkstatt-shop
 
 services:
   api:
     build: .
     image: shop-api:1.0.0
-    # TODO 1: DATABASE_URL setzen – der Hostname ist der Servicename db.
-    # TODO 2: Port 3000 auf den Host veröffentlichen.
-    # TODO 3: Startreihenfolge: erst db, dann api.
+    # TODO 1: Set DATABASE_URL – the hostname is the service name db.
+    # TODO 2: Publish port 3000 on the host.
+    # TODO 3: Start order: db first, then api.
 
-  # TODO 4: Service db mit postgres:18, POSTGRES_PASSWORD=werkstatt, POSTGRES_DB=shop.
-  #         Named Volume db-data nach /var/lib/postgresql, ./db/init.sql read-only
-  #         nach /docker-entrypoint-initdb.d/init.sql. Keine ports.
+  # TODO 4: Service db with postgres:18, POSTGRES_PASSWORD=werkstatt, POSTGRES_DB=shop.
+  #         Named volume db-data at /var/lib/postgresql, ./db/init.sql read-only
+  #         at /docker-entrypoint-initdb.d/init.sql. No ports.
 
-# TODO 5: Named Volume db-data auf oberster Ebene deklarieren.
+# TODO 5: Declare the named volume db-data at the top level.

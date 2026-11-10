@@ -1,21 +1,21 @@
 #!/usr/bin/env bash
-# Images auf bekannte Schwachstellen (CVEs) prüfen und Base Images vergleichen.
+# Check images for known vulnerabilities (CVEs) and compare base images.
 set -euo pipefail
 cd "$(dirname "$0")"
 
 docker compose build api
 
-# 1. Wie groß sind die Kandidaten?
+# 1. How large are the candidates?
 docker image ls --format '{{.Repository}}:{{.Tag}} {{.Size}}' | grep -E '^(node:26-slim|shop-api:1\.1\.0) '
 
-# 2. Alle Funde ab HIGH, auch ohne Fix: erst node:26-slim, dann das Distroless-Image.
+# 2. All findings from HIGH up, even without a fix: first node:26-slim, then the Distroless image.
 trivy image --quiet --severity HIGH,CRITICAL --table-mode summary node:26-slim
 trivy image --quiet --severity HIGH,CRITICAL --table-mode summary shop-api:1.1.0
 
-# 3. Gate für die CI: Exit-Code 1, sobald eine kritische Lücke mit Fix auftaucht.
+# 3. Gate for the CI: exit code 1 as soon as a critical vulnerability with a fix shows up.
 trivy image --quiet --exit-code 1 --severity CRITICAL --ignore-unfixed shop-api:1.1.0
 
-# 4. Keine Shell im Image: Ein Angreifer findet nichts, womit er weiterarbeiten kann.
+# 4. No shell in the image: an attacker finds nothing to continue with.
 if docker run --rm --entrypoint sh shop-api:1.1.0 -c true 2>/dev/null; then
   echo "Shell gefunden – das Image ist nicht distroless. Prüf, ob die zweite Stage im Dockerfile auf gcr.io/distroless/nodejs26-debian13:nonroot aufbaut." >&2
   exit 1

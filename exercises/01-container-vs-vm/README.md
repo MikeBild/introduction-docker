@@ -1,30 +1,32 @@
-# 01 · Ein Container ist ein Prozess, keine VM
+*English · [Deutsch](README.de.md)*
 
-Lektion `container-vs-vm`. Du zeigst mit vier Befehlen, dass ein Container ein isolierter Prozess auf dem Kernel des Hosts ist.
+# 01 · A container is a process, not a VM
 
-## Aufgabe
+Lesson `container-vs-vm`. With four commands you show that a container is an isolated process on the kernel of the host.
 
-Ergänze in [`start/run.sh`](start/run.sh) die vier Befehle:
+## Task
 
-1. Starte `node:26-slim` mit `--rm` und gib `process.pid` und `process.version` aus.
-2. Gib im Container die Kernel-Version mit `uname -r` aus und vergleiche sie mit dem Host.
-3. Begrenze den Container auf 256 MiB und eine halbe CPU (`--memory 256m --cpus 0.5`) und lies die Grenzen aus `/sys/fs/cgroup`.
-4. Prüf mit `id`, als welcher User der Prozess läuft.
+Add the four commands to [`start/run.sh`](start/run.sh):
+
+1. Start `node:26-slim` with `--rm` and print `process.pid` and `process.version`.
+2. Print the kernel version inside the container with `uname -r` and compare it with the host.
+3. Limit the container to 256 MiB and half a CPU (`--memory 256m --cpus 0.5`) and read the limits from `/sys/fs/cgroup`.
+4. Check with `id` which user the process runs as.
 
 ```bash
 cd exercises/01-container-vs-vm/start
 bash run.sh
 ```
 
-## Prüfkriterien
+## Acceptance criteria
 
-- Der Prozess im Container hat die PID 1.
-- Die Kernel-Version ist im Container dieselbe wie auf dem Host bzw. in der VM von Docker Desktop.
-- `memory.max` zeigt `268435456`, `cpu.max` zeigt `50000 100000`.
-- Ab Werk läuft der Prozess als `root` – das änderst du in der Lektion zu Images.
+- The process in the container has PID 1.
+- The kernel version in the container is the same as on the host or in the VM of Docker Desktop.
+- `memory.max` shows `268435456`, `cpu.max` shows `50000 100000`.
+- By default the process runs as `root` – you change that in the lesson on images.
 
-Entferne in `start/test/run.test.ts` das `.skip` und führe `npx vitest exercises/01-container-vs-vm/start` aus.
+Remove the `.skip` in `start/test/run.test.ts` and run `npx vitest exercises/01-container-vs-vm/start`.
 
-## Lösung
+## Solution
 
 [`solution/run.sh`](solution/run.sh)

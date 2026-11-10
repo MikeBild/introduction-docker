@@ -4,23 +4,23 @@ import { compose } from '../../../../scripts/lib/files.ts'
 const { services } = compose(`${import.meta.dirname}/..`)
 const testOf = (name: string) => [services[name]?.healthcheck?.test ?? []].flat().join(' ')
 
-// Entferne .skip, sobald du mit der Übung beginnst.
+// Remove .skip as soon as you start the exercise.
 describe.skip('05 Healthchecks', () => {
-  it('prüft Postgres mit pg_isready', () => {
+  it('checks Postgres with pg_isready', () => {
     expect(testOf('db')).toMatch(/pg_isready/)
   })
 
-  it('prüft die API über /readyz, ohne curl', () => {
+  it('checks the API through /readyz, without curl', () => {
     expect(testOf('api')).toContain('/readyz')
     expect(testOf('api')).not.toMatch(/curl|wget/)
   })
 
-  it('setzt Intervall und Wiederholungen', () => {
+  it('sets interval and retries', () => {
     expect(services.db?.healthcheck?.interval).toBeDefined()
     expect(services.db?.healthcheck?.retries).toBeGreaterThan(1)
   })
 
-  it('startet die API erst, wenn Postgres healthy ist', () => {
+  it('starts the API only when Postgres is healthy', () => {
     const dependsOn = services.api?.depends_on
     expect(Array.isArray(dependsOn)).toBe(false)
     expect((dependsOn as Record<string, { condition?: string }>).db?.condition).toBe('service_healthy')

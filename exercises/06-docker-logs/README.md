@@ -1,32 +1,34 @@
-# 06 · Logs gehören nach stdout, nicht in Dateien
+*English · [Deutsch](README.de.md)*
 
-Lektion `docker-logs`. Die API schreibt eine JSON-Zeile pro Ereignis nach stdout. Du liest die Logs mit `docker compose logs`, filterst sie mit `jq` und begrenzt den Platz mit dem Driver `local`.
+# 06 · Logs belong on stdout, not in files
 
-## Aufgabe
+Lesson `docker-logs`. The API writes one JSON line per event to stdout. You read the logs with `docker compose logs`, filter them with `jq` and limit the disk space with the driver `local`.
 
-1. Ergänze in [`start/compose.yaml`](start/compose.yaml) einen YAML-Anker `x-logging` mit `driver: local`, `max-size: "10m"` und `max-file: "3"` und hänge ihn mit `logging: *logging` an `api` und `db`.
-2. Ergänze [`start/logs.sh`](start/logs.sh): alle Services, nur die API mit Zeitstempel, nur `order placed` per `jq`, die `LogConfig` per `docker inspect`.
+## Task
+
+1. In [`start/compose.yaml`](start/compose.yaml), add a YAML anchor `x-logging` with `driver: local`, `max-size: "10m"` and `max-file: "3"` and attach it to `api` and `db` with `logging: *logging`.
+2. Complete [`start/logs.sh`](start/logs.sh): all services, only the API with timestamps, only `order placed` via `jq`, the `LogConfig` via `docker inspect`.
 
 ```bash
 cd exercises/06-docker-logs/start
 docker compose up -d --build --wait
 bash logs.sh
-docker compose logs -f        # live mitlesen, Abbruch mit Strg+C
+docker compose logs -f        # follow live, stop with Ctrl+C
 docker compose down -v
 ```
 
-## Prüfkriterien
+## Acceptance criteria
 
-- `docker inspect` zeigt `{"Type":"local","Config":{"max-file":"3","max-size":"10m"}}`.
-- `jq` gibt nur die Zeilen mit `"msg":"order placed"` aus.
-- Die App selbst kennt weder Logdateien noch Rotation.
+- `docker inspect` shows `{"Type":"local","Config":{"max-file":"3","max-size":"10m"}}`.
+- `jq` prints only the lines with `"msg":"order placed"`.
+- The app itself knows neither log files nor rotation.
 
-Ohne Angabe nutzt Docker den Driver `json-file` ohne Rotation. Für den ganzen Host stellst du den Standard in `/etc/docker/daemon.json` mit `"log-driver": "local"` um. Das gilt nur für neu erzeugte Container.
+Without configuration Docker uses the driver `json-file` without rotation. For the whole host you change the default in `/etc/docker/daemon.json` with `"log-driver": "local"`. That applies only to newly created containers.
 
-`jq` installierst du mit `brew install jq` oder `apt install jq`.
+Install `jq` with `brew install jq` or `apt install jq`.
 
-Entferne in `start/test/logs.test.ts` das `.skip` und führe `npx vitest exercises/06-docker-logs/start` aus.
+Remove the `.skip` in `start/test/logs.test.ts` and run `npx vitest exercises/06-docker-logs/start`.
 
-## Lösung
+## Solution
 
-[`solution/compose.yaml`](solution/compose.yaml) und [`solution/logs.sh`](solution/logs.sh)
+[`solution/compose.yaml`](solution/compose.yaml) and [`solution/logs.sh`](solution/logs.sh)

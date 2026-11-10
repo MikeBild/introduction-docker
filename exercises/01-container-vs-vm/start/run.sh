@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Ein Container ist ein Prozess auf dem Kernel des Hosts – keine eigene Maschine.
+# A container is a process on the kernel of the host – not a machine of its own.
 set -euo pipefail
 
-# TODO 1: Starte node:26-slim mit --rm und gib process.pid und process.version aus.
+# TODO 1: Start node:26-slim with --rm and print process.pid and process.version.
 
-# TODO 2: Gib im Container die Kernel-Version aus (uname -r) und vergleiche sie mit dem Host.
+# TODO 2: Print the kernel version inside the container (uname -r) and compare it with the host.
 
-# TODO 3: Begrenze den Container auf 256 MiB Speicher und eine halbe CPU (--memory, --cpus)
-#         und lies die Grenzen aus /sys/fs/cgroup/memory.max und /sys/fs/cgroup/cpu.max.
+# TODO 3: Limit the container to 256 MiB of memory and half a CPU (--memory, --cpus)
+#         and read the limits from /sys/fs/cgroup/memory.max and /sys/fs/cgroup/cpu.max.
 
-# TODO 4: Prüfe mit id, als welcher User der Prozess läuft.
+# TODO 4: Check with id which user the process runs as.

@@ -1,32 +1,34 @@
-# 07 · Ein Image ist erst fertig, wenn es in der Registry liegt
+*English · [Deutsch](README.de.md)*
 
-Lektion `docker-registry`. Du startest eine eigene Registry mit `registry:3`, schiebst das Image der API hinein und startest den Stack aus der Registry.
+# 07 · An image is only done when it sits in the registry
 
-## Aufgabe
+Lesson `docker-registry`. You start a registry of your own with `registry:3`, push the API image into it and start the stack from the registry.
 
-1. Ergänze [`start/registry.sh`](start/registry.sh): Registry starten, taggen, pushen, abfragen, lokal löschen, pullen.
-2. Stell in [`start/compose.yaml`](start/compose.yaml) das Image von `api` auf `localhost:5001/shop-api:1.0.0` um.
+## Task
+
+1. Complete [`start/registry.sh`](start/registry.sh): start the registry, tag, push, query, delete locally, pull.
+2. In [`start/compose.yaml`](start/compose.yaml), switch the image of `api` to `localhost:5001/shop-api:1.0.0`.
 
 ```bash
 cd exercises/07-docker-registry/start
 bash registry.sh
 docker compose up -d --wait
 docker compose down -v
-docker rm -f registry && docker volume rm registry-data   # aufräumen
+docker rm -f registry && docker volume rm registry-data   # cleanup
 ```
 
-## Prüfkriterien
+## Acceptance criteria
 
-- `curl localhost:5001/v2/_catalog` liefert `{"repositories":["shop-api"]}`.
-- Nach `docker image rm` holt `docker pull` das Image mit demselben Digest zurück.
-- Die Registry hört nur auf `127.0.0.1`, nicht auf allen Interfaces.
+- `curl localhost:5001/v2/_catalog` returns `{"repositories":["shop-api"]}`.
+- After `docker image rm`, `docker pull` brings the image back with the same digest.
+- The registry listens only on `127.0.0.1`, not on all interfaces.
 
-Docker spricht mit `localhost` auch ohne TLS. Jeder andere Registry-Host braucht TLS und ein Login. Wie du die Registry mit htpasswd und Zertifikat absicherst, zeigen die Folien [„Docker in der Praxis“](https://slides.mikebild.dev/introduction-docker.html).
+Docker talks to `localhost` without TLS. Every other registry host needs TLS and a login. How to secure the registry with htpasswd and a certificate is shown in the slides [“Docker in der Praxis”](https://slides.mikebild.dev/introduction-docker.html) (in German).
 
-Port 5000 belegt unter macOS der AirPlay-Empfänger. Deshalb nutzt die Übung auf dem Host Port 5001, im Container bleibt es 5000.
+On macOS the AirPlay receiver takes port 5000. That is why the exercise uses port 5001 on the host; inside the container it stays 5000.
 
-Entferne in `start/test/registry.test.ts` das `.skip` und führe `npx vitest exercises/07-docker-registry/start` aus.
+Remove the `.skip` in `start/test/registry.test.ts` and run `npx vitest exercises/07-docker-registry/start`.
 
-## Lösung
+## Solution
 
-[`solution/registry.sh`](solution/registry.sh) und [`solution/compose.yaml`](solution/compose.yaml)
+[`solution/registry.sh`](solution/registry.sh) and [`solution/compose.yaml`](solution/compose.yaml)

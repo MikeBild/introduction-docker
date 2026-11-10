@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
-# API und Postgres von Hand verbinden: ein eigenes Netz, ein Named Volume.
+# Connect the API and Postgres by hand: a network of its own, a named volume.
 set -euo pipefail
 cd "$(dirname "$0")"
 
-# TODO 1: Leg das Bridge-Netz shop-net an (docker network create).
+# TODO 1: Create the bridge network shop-net (docker network create).
 
-# TODO 2: Leg das Named Volume shop-db an (docker volume create).
+# TODO 2: Create the named volume shop-db (docker volume create).
 
-# TODO 3: Starte postgres:18 als Container db im Netz shop-net.
-#         Volume shop-db nach /var/lib/postgresql, db/init.sql nach /docker-entrypoint-initdb.d/init.sql (read-only).
-#         POSTGRES_PASSWORD=werkstatt, POSTGRES_DB=shop. Kein -p: Postgres bleibt intern.
-#         Warte danach mit pg_isready, bis Postgres bereit ist.
+# TODO 3: Start postgres:18 as container db in the network shop-net.
+#         Volume shop-db at /var/lib/postgresql, db/init.sql at /docker-entrypoint-initdb.d/init.sql (read-only).
+#         POSTGRES_PASSWORD=werkstatt, POSTGRES_DB=shop. No -p: Postgres stays internal.
+#         Then wait with pg_isready until Postgres is ready.
 
-# TODO 4: Bau shop-api:1.0.0 und starte es als Container api im Netz shop-net mit -p 3000:3000.
+# TODO 4: Build shop-api:1.0.0 and start it as container api in the network shop-net with -p 3000:3000.
 #         DATABASE_URL=postgres://postgres:werkstatt@db:5432/shop
 
-# TODO 5: Leg per POST /orders eine Bestellung an, lösche den Container db,
-#         starte ihn mit demselben Volume neu und prüf mit GET /orders, dass die Bestellung noch da ist.
+# TODO 5: Place an order with POST /orders, remove the container db,
+#         start it again with the same volume and check with GET /orders that the order is still there.

@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitest/config'
 
-// Tests der App, aller Lösungen und aller Startpunkte.
-// Die Startpunkte stehen auf describe.skip und zählen als skipped, bis du .skip entfernst.
+// Tests of the app, all solutions and all starting points.
+// The starting points use describe.skip and count as skipped until you remove .skip.
 export default defineConfig({
   test: {
     include: ['app/test/**/*.test.ts', 'exercises/*/{start,solution}/test/**/*.test.ts'],

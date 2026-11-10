@@ -5,25 +5,25 @@ const dir = `${import.meta.dirname}/..`
 const { services } = compose(dir)
 const logs = script(dir, 'logs.sh')
 
-// Entferne .skip, sobald du mit der Übung beginnst.
+// Remove .skip as soon as you start the exercise.
 describe.skip('06 Logs', () => {
-  it('nutzt für jeden Service den Driver local mit Rotation', () => {
+  it('uses the driver local with rotation for every service', () => {
     for (const name of ['api', 'db']) {
       expect(services[name]?.logging?.driver).toBe('local')
       expect(services[name]?.logging?.options).toMatchObject({ 'max-size': '10m', 'max-file': '3' })
     }
   })
 
-  it('liest die Logs aller Services und einzeln mit Zeitstempel', () => {
+  it('reads the logs of all services and of a single one with timestamps', () => {
     expect(logs).toMatch(/docker compose logs --tail \d+/)
     expect(logs).toMatch(/docker compose logs -t --since \S+ api/)
   })
 
-  it('filtert JSON-Zeilen mit jq nach Feldern', () => {
+  it('filters JSON lines by fields with jq', () => {
     expect(logs).toMatch(/docker compose logs --no-log-prefix api \| jq/)
   })
 
-  it('prüft die LogConfig des Containers', () => {
+  it('checks the LogConfig of the container', () => {
     expect(logs).toContain('.HostConfig.LogConfig')
   })
 })
