@@ -95,13 +95,13 @@ docker image prune                           # dangling images
 
 ## Workshop and slides
 
-- Workshop: [“Docker & Kubernetes”](https://workshops.mikebild.dev/w/docker-kubernetes/remote/)
-- Slides: [slides.mikebild.dev/introduction-docker](https://slides.mikebild.dev/introduction-docker.html)
-- PDF: [slides.mikebild.dev/introduction-docker.pdf](https://slides.mikebild.dev/introduction-docker.pdf)
-- Articles on mikebild.dev (in German):
-  - [Node.js und Redis mit Docker Compose](https://www.mikebild.dev/de/blog/docker-compose-nodejs-redis/)
-  - [Zentrales Logging mit dem ELK-Stack in Docker](https://www.mikebild.dev/de/blog/docker-logging-mit-elk/)
-  - [Eine eigene Docker Registry betreiben](https://www.mikebild.dev/de/blog/docker-eigene-registry/)
+- Workshop (held in German): [“Docker & Kubernetes”](https://workshops.mikebild.dev/w/docker-kubernetes/remote/)
+- Slides: [slides.mikebild.dev/introduction-docker.en](https://slides.mikebild.dev/introduction-docker.en.html)
+- PDF: [introduction-docker.en.pdf](https://objects.upraft.mikebild.info/site-media/mikebild/decks/introduction-docker/introduction-docker.en.pdf)
+- Posts on mikebild.dev:
+  - [Node.js and Redis with Docker Compose](https://www.mikebild.dev/en/blog/nodejs-and-redis-with-docker-compose/)
+  - [Central Logging with the ELK Stack in Docker](https://www.mikebild.dev/en/blog/central-logging-with-the-elk-stack-in-docker/)
+  - [Running Your Own Docker Registry](https://www.mikebild.dev/en/blog/running-your-own-docker-registry/)
 
 ## Archive
 
