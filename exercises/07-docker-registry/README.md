@@ -23,7 +23,7 @@ docker rm -f registry && docker volume rm registry-data   # cleanup
 - After `docker image rm`, `docker pull` brings the image back with the same digest.
 - The registry listens only on `127.0.0.1`, not on all interfaces.
 
-Docker talks to `localhost` without TLS. Every other registry host needs TLS and a login. How to secure the registry with htpasswd and a certificate is shown in the slides [“Docker in der Praxis”](https://slides.mikebild.dev/introduction-docker.html) (in German).
+Docker talks to `localhost` without TLS. Every other registry host needs TLS and a login. How to secure the registry with htpasswd and a certificate is described in the guide [“Deploying a registry server”](https://distribution.github.io/distribution/about/deploying/) of the registry project.
 
 On macOS the AirPlay receiver takes port 5000. That is why the exercise uses port 5001 on the host; inside the container it stays 5000.
 
